@@ -10,8 +10,8 @@ const store = configureStore();
 
 const renderApp = App =>
     render(
-        <Provider store={store} value={Math.random()}>
-            <App/>
+        <Provider store={store}>
+            <App key={Date.now()} />
         </Provider>,
         rootNode
     );

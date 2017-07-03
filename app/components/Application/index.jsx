@@ -8,7 +8,7 @@ class Application extends React.PureComponent {
     
     render() {
         return (
-            <div className={b()}>HELLO! THIS IS JSON RPC</div>
+            <div className={b()}>HELLO! THIS IS JSON RPС</div>
         );
     }
 }
