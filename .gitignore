@@ -30,7 +30,7 @@ node_modules/
 tmp/
 
 # Brunch output folder.
-public/
+build/
 app/assets/jsConfig.standalone.js
 jsconfig.json
 ui_npm
