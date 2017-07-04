@@ -1,33 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import bemCl from 'bem-cl';
 
-import FormFromSchema from 'components/FormFromSchema';
-import { getSelectedMethod } from './selectors';
+import MethodViewer from 'components/MethodViewer';
+import { getSelectedMethodSchema } from './selectors';
 
-const b = bemCl('sb-view-selected-method-container');
 
-@connect(
+export default connect(
     state => ({
-        methodSchema: getSelectedMethod(state, 'lists.Episodes')
-    }),
-    {
-        
-    }
-)
-class ViewSelectedMethodContainer extends React.PureComponent {
-    render() {
-        return (
-            <div className={b()}>
-                {
-                    this.props.methodSchema ?
-                    <FormFromSchema schema={this.props.methodSchema} /> :
-                    null
-                }
-            </div>
-        );
-    }
-}
-
-
-export default ViewSelectedMethodContainer;
+        methodSchema: getSelectedMethodSchema(state)
+    })
+)(MethodViewer);

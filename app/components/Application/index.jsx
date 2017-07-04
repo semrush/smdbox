@@ -4,6 +4,7 @@ import './Application.scss';
 const b = bemCl('sb-application');
 import CreateProject from 'containers/CreateProject';
 import MainLayout from 'components/MainLayout';
+
 import ViewSelectedMethod from 'containers/ViewSelectedMethod';
 import Sidebar from 'containers/Sidebar';
 import { Grid, Col, Row } from 'react-bootstrap';
