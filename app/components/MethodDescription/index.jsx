@@ -3,6 +3,13 @@ import { Table } from 'react-bootstrap';
     
 class MethodDescription extends React.PureComponent{
     
+    resolveType(type, parent) {
+        if (type === 'array'){
+            return `[ ] ${parent.items.type}`;
+        }
+        
+        return type;
+    }
     renderParam(param, parent, namespace = '') {
         const rows = [];
         
@@ -15,7 +22,7 @@ class MethodDescription extends React.PureComponent{
                     {parent[param].description || '--'}
                 </td>
                 <td>
-                    {parent[param].type}
+                    {this.resolveType(parent[param].type, parent[param])}
                 </td>
                 <td>
                     {parent[param].optional ? 'Yes' : 'No'}
