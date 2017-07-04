@@ -8,6 +8,7 @@ import configureStore from './configureStore';
 const rootNode = document.querySelector('#json-rpc-root');
 const store = configureStore(JSON.parse(localStorage.getItem('smdBox')) || {});
 
+
 const renderApp = App =>
     render(
         <Provider store={store}>

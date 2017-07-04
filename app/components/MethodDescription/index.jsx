@@ -2,6 +2,45 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
     
 class MethodDescription extends React.PureComponent{
+    
+    renderParam(param, parent, namespace = '') {
+        const rows = [];
+        
+        rows.push(
+            <tr key={namespace ? `${namespace}.${param}` : param}>
+                <td>
+                    <b>{namespace ? `${namespace}.${param}` : param}</b>
+                </td>
+                <td>
+                    {parent[param].description || '--'}
+                </td>
+                <td>
+                    {parent[param].type}
+                </td>
+                <td>
+                    {parent[param].optional ? 'Yes' : 'No'}
+                </td>
+            </tr>
+        );
+        
+        
+        if (parent[param].properties) {
+            Object.keys(parent[param].properties).forEach(
+                nestedParam => {
+                    rows.push(
+                        this.renderParam(
+                            nestedParam,
+                            parent[param].properties,
+                            namespace ? `${namespace}.${param}` : param
+                        )
+                    )
+                }
+            )
+        }
+        
+        return rows;
+    }
+    
     render() {
         if (!this.props.schema || !this.props.schema.properties) return null;
         
@@ -19,24 +58,8 @@ class MethodDescription extends React.PureComponent{
                     </thead>
                     <tbody>
                     {
-                        Object.keys(this.props.schema.properties).map(param => {
-                                return (
-                                    <tr key={param}>
-                                        <td>
-                                            {param}
-                                        </td>
-                                        <td>
-                                            {this.props.schema.properties[param].description || '--'}
-                                        </td>
-                                        <td>
-                                            {this.props.schema.properties[param].type}
-                                        </td>
-                                        <td>
-                                            {this.props.schema.properties[param].optional ? 'Yes' : 'No'}
-                                        </td>
-                                    </tr>
-                                )
-                            }
+                        Object.keys(this.props.schema.properties).map(
+                            param => this.renderParam(param, this.props.schema.properties)
                         )
                     }
                     </tbody>

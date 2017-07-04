@@ -20,10 +20,10 @@ class MethodViewer extends React.PureComponent {
         return (
             <Grid fluid>
                 <Row>
-                    <Col md={6}>
+                    <Col md={7}>
                         <MethodDescription schema={this.props.methodSchema} />
                     </Col>
-                    <Col md={6}>
+                    <Col md={5}>
                         <MethodInvoker schema={this.props.methodSchema} />
                     </Col>
                 </Row>
