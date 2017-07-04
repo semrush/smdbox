@@ -1,30 +1,23 @@
 import React from 'react';
 import bemCl from 'bem-cl';
-import FormFromSchema from 'components/FormFromSchema';
-
-
 import './Application.scss';
-
 const b = bemCl('sb-application');
-
+import CreateProject from 'containers/CreateProject';
+import MainLayout from 'components/MainLayout';
+import ViewSelectedMethod from 'containers/ViewSelectedMethod';
 
 class Application extends React.PureComponent {
     
     render() {
         return (
-            <div>
-                <nav className="navbar navbar-inverse navbar-static-top">
-                    <div className="container-fluid">
-                        <div className="navbar-header">
-                            <a className="navbar-brand" href="#">SMDbox</a>
-                        </div>
+            <MainLayout
+                content={
+                    <div className={b()}>
+                        <CreateProject />
+                        <ViewSelectedMethod />
                     </div>
-                </nav>
-                <div className="container">
-                    <CreateProject />
-                    <FormFromSchema />
-                </div>
-            </div>
+                }
+            />
         );
     }
 }
