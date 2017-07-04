@@ -78,7 +78,7 @@ const webpackConfigWidget = {
             root: path.resolve(__dirname, '../'),
             verbose: false
         }),
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin('[name].[hash].css'),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: `${APP_FOLDER}/assets/html/index.html`,
@@ -106,8 +106,8 @@ const webpackConfigWidget = {
     output: {
         path: path.resolve(process.cwd(), BUILD_FOLDER),
         publicPath: PUBLIC_PATH,
-        filename: '[name].js',
-        chunkFilename: 'chunk.[name].js'
+        filename: '[name].[hash].js',
+        chunkFilename: 'chunk.[name].[hash].js'
     }
 };
 
