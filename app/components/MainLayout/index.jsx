@@ -12,9 +12,7 @@ class MainLayout extends React.PureComponent{
                         </div>
                     </div>
                 </nav>
-                <div className="container">
-                    {this.props.content}
-                </div>
+                {this.props.content}
             </div>
         )
     }
