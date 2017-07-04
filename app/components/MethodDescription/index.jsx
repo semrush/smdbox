@@ -5,7 +5,7 @@ class MethodDescription extends React.PureComponent{
     
     resolveType(type, parent) {
         if (type === 'array'){
-            return `[ ] ${parent.items.type}`;
+            return `[ ]${parent.items.type}`;
         }
         
         return type;
@@ -25,7 +25,7 @@ class MethodDescription extends React.PureComponent{
                     {this.resolveType(parent[param].type, parent[param])}
                 </td>
                 <td>
-                    {parent[param].optional ? 'Yes' : 'No'}
+                    {parent[param].optional ? 'No' : 'Yes'}
                 </td>
             </tr>
         );
@@ -53,14 +53,15 @@ class MethodDescription extends React.PureComponent{
         
         return (
             <div>
-                <h2>{this.props.schema.description}</h2>
+                <h2>{this.props.method}</h2>
+                <h4>{this.props.schema.description}</h4>
                 <Table striped bordered condensed hover>
                     <thead>
                     <tr>
                         <th>Param</th>
                         <th>Description</th>
-                        <th>type</th>
-                        <th>Optional</th>
+                        <th>Type</th>
+                        <th>Required</th>
                     </tr>
                     </thead>
                     <tbody>
