@@ -29,6 +29,10 @@ export default function (initialData) {
             ...enhancers
         )
     );
+    
+    store.subscribe(() =>
+        localStorage.setItem('smdBox', JSON.stringify(store.getState()))
+    )
 
     sagaMiddleware.run(rootSaga);
 
