@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import application from 'containers/Application/reducer';
-import createProject from 'containers/CreateProject/reducer';
+import project from 'containers/CreateProject/reducer';
 
 const rootReducer = combineReducers({
     application,
-    createProject
+    project
 });
 
 export default rootReducer;

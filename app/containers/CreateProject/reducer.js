@@ -10,7 +10,8 @@ export function upload(url) {
 
 function createProjectReducer(state = initialState, action) {
     switch (action.type) {
-    
+    case ACTION_TYPES.UPLOAD_SUCCESS:
+        return { ...state, smdScheme: action.smdScheme }
     default:
         return state;
     }

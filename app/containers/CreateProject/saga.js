@@ -5,14 +5,14 @@ import $ from 'jquery';
 
 function* onUpload({ url }) {
     try {
-        const data = yield call(() => {
+        const smdScheme = yield call(() => {
             return new Promise((resolve, reject) => {
                 $.getJSON(url, (data) => {
                     resolve(data)
                 })
             })
         });
-        yield put({ type: ACTION_TYPES.UPLOAD_SUCCESS, data });
+        yield put({ type: ACTION_TYPES.UPLOAD_SUCCESS, smdScheme });
     } catch(e) {
         console.log(e);
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import bem from 'bem-cl';
-import { FormControl } from 'react-bootstrap';
+import { FormControl, Form, FormGroup, Button } from 'react-bootstrap';
 import './CreateProject.scss';
 
 const b = {
@@ -21,15 +21,20 @@ export default class extends React.Component {
     render() {
         return (
             <div className={ b.createProject() }>
-                <h2 className={ b.createProject('header') }>Getting started</h2>
                 <div className={ b.createProject('step') }>
-                    <h3 className={ b.createProject('step-header') }>Upload your SMD</h3>
-                    <FormControl
-                        size="large"
-                        placeholder="SMD file URL"
-                        bsSize="lg"
-                        onChange={ (e) => this.setState({ smdUrl: e.nativeEvent.target.value }) }
-                    />
+                    <Form horizontal>
+                        <FormGroup>
+                            <FormControl
+                                placeholder="SMD file URL"
+                                onChange={ (e) => this.setState({ smdUrl: e.nativeEvent.target.value }) }
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Button type="submit" onClick={ this.onSubmit.bind(this) }>
+                                Upload
+                            </Button>
+                        </FormGroup>
+                    </Form>
                 </div>
             </div>
         )
