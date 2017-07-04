@@ -1,15 +1,7 @@
 import React from 'react';
-import bemCl from 'bem-cl';
-import FormFromSchema from 'components/FormFromSchema';
 
 
-import './Application.scss';
-
-const b = bemCl('sb-application');
-
-
-class Application extends React.PureComponent {
-    
+class MainLayout extends React.PureComponent{
     render() {
         return (
             <div>
@@ -21,12 +13,11 @@ class Application extends React.PureComponent {
                     </div>
                 </nav>
                 <div className="container">
-                    <CreateProject />
-                    <FormFromSchema />
+                    {this.props.content}
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default Application;
+export default MainLayout;
