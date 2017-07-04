@@ -9,7 +9,8 @@ export default connect((state) => ({
         const method = key.split('.')[1];
         namespaces[namespace] = { ...namespaces[namespace], [method]: service };
         return namespaces;
-    }, {})
+    }, {}),
+    selectedService: state.sidebar.selected
 }), {
     selectService
 })(Sidebar)

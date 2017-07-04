@@ -25,10 +25,10 @@ class Application extends React.PureComponent {
                             !this.props.isProjectEmpty &&
                             <Grid fluid>
                                 <Row>
-                                    <Col md={4}>
+                                    <Col md={3}>
                                         <Sidebar />
                                     </Col>
-                                    <Col md={8}>
+                                    <Col md={9}>
                                         <ViewSelectedMethod />
                                     </Col>
                                 </Row>
