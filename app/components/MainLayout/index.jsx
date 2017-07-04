@@ -10,6 +10,10 @@ class MainLayout extends React.PureComponent{
                         <div className="navbar-header">
                             <a className="navbar-brand" href="#">SMDbox</a>
                         </div>
+                        
+                        <ul className="nav navbar-nav navbar-right">
+                            <li>{  }</li>
+                        </ul>
                     </div>
                 </nav>
                 {this.props.content}
