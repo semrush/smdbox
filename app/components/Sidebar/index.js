@@ -12,7 +12,7 @@ export default class extends React.Component {
                         { namespaceKey }
                         <ul>
                             { map(namespace, (method, methodKey) => (
-                                <li key={ methodKey }>{ methodKey }</li>
+                                <li key={ methodKey } onClick={ () => this.props.selectService(`${namespaceKey}.${methodKey}`) }>{ methodKey }</li>
                             )) }
                         </ul>
                     </li>
