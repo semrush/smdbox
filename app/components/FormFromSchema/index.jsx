@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import bemCl from 'bem-cl';
-import SForm from "react-jsonschema-form";
+import Form from "react-jsonschema-form";
 
 import './FormFromSchema.scss';
 
@@ -11,11 +11,13 @@ const b = bemCl('sb-form-from-schema');
 class FormFromSchema extends React.PureComponent {
    
     static propTypes = {
-        schema: PropTypes.object
+        schema: PropTypes.object,
+        onSubmit: PropTypes.func
     };
     
     static defaultProps = {
-        schema: null
+        schema: null,
+        onSubmit: () => {}
     };
     
     render() {
@@ -23,10 +25,14 @@ class FormFromSchema extends React.PureComponent {
         
         return (
             <div className={b()}>
-                <SForm
+                <Form
                     schema={this.props.schema}
+                    onSubmit={this.props.onSubmit}
                 >
-                </SForm>
+                </Form>
+                {
+                    this.props.loading  ? <div>...Loading...</div> : null
+                }
             </div>
         );
     }

@@ -27,7 +27,12 @@ class MethodViewer extends React.PureComponent {
                         />
                     </Col>
                     <Col md={5}>
-                        <MethodInvoker schema={this.props.methodSchema} />
+                        <MethodInvoker
+                            schema={this.props.methodSchema}
+                            runMethod={this.props.runMethod}
+                            loading={this.props.state.loading}
+                            response={this.props.state.response}
+                        />
                     </Col>
                 </Row>
             </Grid>

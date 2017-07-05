@@ -5,7 +5,7 @@ const b = bemCl('sb-application');
 import CreateProject from 'containers/CreateProject';
 import MainLayout from 'components/MainLayout';
 
-import ViewSelectedMethod from 'containers/ViewSelectedMethod';
+import SelectedMethod from 'containers/SelectedMethod';
 import Sidebar from 'containers/Sidebar';
 import { Grid, Col, Row } from 'react-bootstrap';
 
@@ -43,7 +43,7 @@ class Application extends React.PureComponent {
                             <Sidebar />
                         </Col>
                         <Col md={9}>
-                            <ViewSelectedMethod />
+                            <SelectedMethod />
                         </Col>
                     </Row>
                 </Grid>

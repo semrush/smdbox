@@ -7,3 +7,5 @@ export const getSelectedMethodSchema = (state) => {
     if (!state.project.smdScheme || !name || !state.project.smdScheme.services[name]) return null;
     return smdToSchema(state.project.smdScheme.services[name]);
 };
+
+export const getSelectedMethodFullState = state => state.selectedMethod;
