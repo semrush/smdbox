@@ -1,11 +1,10 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import qs from 'qs';
 
 import * as ACTION_TYPES from './actionTypes';
 import * as Actions from './actions';
 
-import { getSchema, getHeaders } from 'containers/CreateProject/selectors';
+import { getSchema, getHeaders, getEndPoint } from 'containers/Project/selectors';
 import { getSelectedMethod } from 'containers/Sidebar/selectors';
 import { createRequest } from 'helpers/rpc';
 
@@ -21,9 +20,10 @@ function* onRunMethod(action) {
         const method = getSelectedMethod(state);
         const rpcRequestParams = createRequest({ method, params: action.params.formData });
         const headers = getHeaders(state);
+        const endpoint = getEndPoint(state);
         
         yield put(Actions.runMethodRequest());
-        const response = yield call(axios.post, `${TMP_URL}${schema.target}`, rpcRequestParams);
+        const response = yield call(axios.post, endpoint, rpcRequestParams, { headers });
         yield put(Actions.runMethodSuccess(response.data.result));
     } catch(e) {
         yield put(Actions.runMethodFailure(e));

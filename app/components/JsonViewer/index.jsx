@@ -10,7 +10,7 @@ const b = bemCl('sb-json-viewer');
 
 class JsonViewer extends React.PureComponent {
     static propTypes = {
-        json: PropTypes.object
+        json: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
     };
     static defaultProps = {
         json: {}
