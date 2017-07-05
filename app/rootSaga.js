@@ -1,9 +1,9 @@
-import CreateProject from 'containers/CreateProject/saga';
 import SelectedMethod from 'containers/SelectedMethod/saga';
+import Project from 'containers/Project/saga';
 
 function* rootSaga() {
     yield [
-        CreateProject(),
+        Project(),
         SelectedMethod()
     ];
 }

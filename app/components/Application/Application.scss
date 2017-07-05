@@ -1,5 +1,15 @@
 .sb-application{
 
+    //.navbar {
+    //    margin-bottom: 0;
+    //}
+
+    .form-inline {
+
+        .form-group:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
 }
 
 

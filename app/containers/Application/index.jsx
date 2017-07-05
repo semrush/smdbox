@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Application from 'components/Application';
-import { clearProject } from '../CreateProject/reducer';
+import { clearProject } from '../Project/reducer';
 
 export default connect(
     state => ({

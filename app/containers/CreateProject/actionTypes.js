@@ -1,3 +1,0 @@
-export const UPLOAD = 'PROJECT:UPLOAD';
-export const CLEAR = 'PROJECT:CLEAR';
-export const UPLOAD_SUCCESS = 'PROJECT:UPLOAD_SUCCESS';

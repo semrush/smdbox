@@ -1,11 +1,13 @@
 import * as ACTION_TYPES from './actionTypes';
 
 const initialState = {
-  smdScheme: null
+    smdScheme: null,
+    headers: {},
+    endpoint: null
 };
 
-export function upload(url) {
-    return { type: ACTION_TYPES.UPLOAD, url }
+export function create(params) {
+    return { type: ACTION_TYPES.CREATE, params }
 }
 
 export function clearProject() {
@@ -14,10 +16,10 @@ export function clearProject() {
 
 function createProjectReducer(state = initialState, action) {
     switch (action.type) {
-    case ACTION_TYPES.UPLOAD_SUCCESS:
-        return { ...state, smdScheme: action.smdScheme };
+    case ACTION_TYPES.CREATE_SUCCESS:
+        return { ...state, ...action.params };
     case ACTION_TYPES.CLEAR:
-        return { ...state, smdScheme: null };
+        return { ...initialState };
     default:
         return state;
     }

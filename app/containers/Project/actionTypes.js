@@ -1,0 +1,3 @@
+export const CREATE = 'PROJECT:CREATE';
+export const CREATE_SUCCESS = 'PROJECT:CREATE_SUCCESS';
+export const CLEAR = 'PROJECT:CLEAR';
