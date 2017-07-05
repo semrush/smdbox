@@ -38,10 +38,10 @@ class Application extends React.PureComponent {
                 !this.props.isProjectEmpty &&
                 <Grid fluid>
                     <Row>
-                        <Col md={3}>
+                        <Col md={3} style={{ height: 'calc(100vh - 51px)', overflow: 'auto' }}>
                             <Sidebar />
                         </Col>
-                        <Col md={9}>
+                        <Col md={9} style={{ height: 'calc(100vh - 51px)', overflow: 'auto' }}>
                             <SelectedMethod />
                         </Col>
                     </Row>

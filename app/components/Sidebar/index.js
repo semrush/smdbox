@@ -9,7 +9,7 @@ export default class extends React.Component {
         return (
             <div className="sb-sidebar">
                 { map(this.props.namespacedMethods, (namespace, namespaceKey) => (
-                    <div key={ namespaceKey }>
+                    <div key={ namespaceKey } className="sb-sidebar__namespace">
                         <div className="h3">{ namespaceKey }</div>
                         <ul className="nav nav-pills nav-stacked">
                             { map(namespace, (method, methodKey) => (
