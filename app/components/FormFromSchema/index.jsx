@@ -30,9 +30,6 @@ class FormFromSchema extends React.PureComponent {
                     onSubmit={this.props.onSubmit}
                 >
                 </Form>
-                {
-                    this.props.loading  ? <div>...Loading...</div> : null
-                }
             </div>
         );
     }

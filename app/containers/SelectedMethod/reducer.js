@@ -1,4 +1,5 @@
 import * as ACTION_TYPES from './actionTypes';
+import * as METHOD_LIST_ACTION_TYPES from 'containers/Sidebar/actionTypes';
 
 const initialState = {
     loading: false,
@@ -24,6 +25,9 @@ function SelectedMethodReducer(state = initialState, action) {
                 loading: false,
                 error: action.error
             };
+            
+        case METHOD_LIST_ACTION_TYPES.SELECT_SERVICE:
+            return initialState;
         default:
             return state;
     }
