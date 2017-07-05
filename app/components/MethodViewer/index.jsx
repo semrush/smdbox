@@ -3,7 +3,7 @@ import bemCl from 'bem-cl';
 
 import MethodDescription from 'components/MethodDescription';
 import MethodInvoker from 'components/MethodInvoker';
-import { Grid, Col, Row } from 'react-bootstrap';
+import { Grid, Col, Row, Alert } from 'react-bootstrap';
 
 const b = bemCl('sb-method-viewer');
 
@@ -11,9 +11,9 @@ class MethodViewer extends React.PureComponent {
     renderContent() {
         if (!this.props.methodSchema) {
             return (
-                <div className="alert alert-info">
+                <Alert bsStyle="info">
                     Select method from list at left
-                </div>
+                </Alert>
             )
         }
         

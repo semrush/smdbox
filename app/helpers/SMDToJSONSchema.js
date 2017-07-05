@@ -1,6 +1,9 @@
 const smdToSchema = (smd) => {
     
-    const P = {properties: {}};
+    const P = {
+        ...smd,
+        properties: {}
+    };
     
     smd.parameters.forEach((param) => {
         P.properties[param.name] = param;
