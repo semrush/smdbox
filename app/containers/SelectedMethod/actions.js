@@ -19,3 +19,7 @@ export const runMethodFailure = (error = '') => ({
     type: ACTION_TYPES.RUN_METHOD_FAILURE,
     error
 });
+
+export const hideError = () => ({
+    type: ACTION_TYPES.HIDE_ERROR
+})

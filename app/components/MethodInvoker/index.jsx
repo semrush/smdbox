@@ -3,6 +3,7 @@ import bemCl from 'bem-cl';
 
 import FormFromSchema from 'components/FormFromSchema';
 import JsonViewer from 'components/JsonViewer';
+import { Alert } from 'react-bootstrap';
 import './MethodInvoker.scss';
 
 const b = bemCl('sb-method-invoker');
@@ -21,6 +22,13 @@ class MethodInvoker extends React.PureComponent {
             );
         }
         
+        if (this.props.error && this.props.error.message) {
+            return (
+                <Alert bsStyle="danger" onDismiss={this.props.hideError}>
+                    {this.props.error.message}
+                </Alert>
+            );
+        }
         if (!this.props.response) return null;
         
         return (

@@ -32,6 +32,8 @@ class MethodViewer extends React.PureComponent {
                             runMethod={this.props.runMethod}
                             loading={this.props.state.loading}
                             response={this.props.state.response}
+                            hideError={this.props.hideError}
+                            error={this.props.state.error}
                         />
                     </Col>
                 </Row>
