@@ -4,7 +4,7 @@ import { clearProject } from '../Project/reducer';
 
 export default connect(
     state => ({
-        isProjectEmpty: state.project.smdScheme === null
+        isProjectCreated: state.project.created
     }),
     {
         clearProject

@@ -2,6 +2,7 @@ import React from 'react'
 import bem from 'bem-cl';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
+import debounce from 'lodash/debounce';
 import { FormControl, Form, FormGroup, Button, ControlLabel, Glyphicon } from 'react-bootstrap';
 import './Project.scss';
 
@@ -20,15 +21,26 @@ export default class extends React.Component {
         super(props);
     
         this.state = {
-            smdUrl: this.props.project.smdUrl || '',
-            endpoint: this.props.project.endpoint || '',
-            headers: map(this.props.project.headers, (value = '', key = '') => ({ key, value }))
+            endpoint: this.props.endpoint || '',
+            headers: map(this.props.headers, (value = '', key = '') => ({ key, value }))
         };
+    
+        this.fetchSmd = debounce(this.fetchSmd.bind(this), 500);
     }
     
     static defaultProps = {
         onSubmit: () => {}
     };
+    
+    componentWillReceiveProps({ endpoint }) {
+        if (endpoint !== this.props.endpoint) {
+            this.setState({ endpoint });
+        }
+    }
+    
+    fetchSmd(url) {
+        this.props.fetchSmd(url);
+    }
     
     onSubmit(e) {
         e.preventDefault();
@@ -61,10 +73,10 @@ export default class extends React.Component {
                 { mode !== modes.SETTINGS &&
                     <div>
                         <h3>SMD scheme *</h3>
-                        <FormGroup>
+                        <FormGroup validationState={ this.props.fetchingSmdError ? 'error' : this.props.smdScheme !== null ? 'success' : null }>
                             <FormControl
-                                onChange={ (e) => this.setState({ smdUrl: e.nativeEvent.target.value }) }
-                                value={ this.state.smdUrl }
+                                disabled={ this.props.fetchingSchema }
+                                onChange={ (e) => { e.persist(); this.fetchSmd(e.nativeEvent.target.value) } }
                             />
                         </FormGroup>
                     </div>
@@ -114,7 +126,12 @@ export default class extends React.Component {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Button bsStyle={ mode === modes.SETTINGS ? "primary" : "success" } type="submit" onClick={ this.onSubmit.bind(this) }>
+                    <Button
+                        bsStyle={ mode === modes.SETTINGS ? "primary" : "success" }
+                        type="submit"
+                        onClick={ this.onSubmit.bind(this) }
+                        disabled={ this.props.smdScheme === null }
+                    >
                         { mode === modes.SETTINGS ? "Update" : "Create" }
                     </Button>
                 </FormGroup>

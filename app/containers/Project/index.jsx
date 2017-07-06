@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import Project from 'components/Project';
-import { create } from './reducer';
+import { create, fetchSmd } from './reducer';
+import pick from 'lodash/pick'
 
 export default connect(state => ({
-    project: state.project
+    ...pick(state.project, 'headers', 'endpoint', 'fetchingSchema', 'smdScheme', 'fetchingSmdError')
 }), {
-    create
+    create,
+    fetchSmd
 })(Project)

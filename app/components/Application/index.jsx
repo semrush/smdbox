@@ -26,7 +26,7 @@ class Application extends React.PureComponent {
                     <div className="navbar-header">
                         <a className="navbar-brand" href="#">SMDbox</a>
                     </div>
-                    { !this.props.isProjectEmpty &&
+                    { this.props.isProjectCreated &&
                         <ul className="nav navbar-nav navbar-right">
                             <li><a href="" onClick={ (e) => {
                                 e.nativeEvent.preventDefault();
@@ -41,13 +41,13 @@ class Application extends React.PureComponent {
                 </div>
             </nav>
             {
-                this.props.isProjectEmpty &&
+                !this.props.isProjectCreated &&
                 <Grid style={{ paddingTop: '15px' }}>
                     <Project />
                 </Grid>
             }
             {
-                !this.props.isProjectEmpty &&
+                this.props.isProjectCreated &&
                 <Grid fluid>
                     <Row>
                         <Col md={3} style={{ height: 'calc(100vh - 51px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>
