@@ -8,9 +8,14 @@
     &__loading{
         i{
             animation: rotate 1s linear infinite;
+            font-size: 30px;
         }
         margin: 0 auto;
         text-align: center;
+    }
+
+    &__content{
+        margin-bottom: 20px;
     }
     .tab-content{
         padding-top: 10px;

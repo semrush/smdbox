@@ -3,7 +3,8 @@ import * as METHOD_LIST_ACTION_TYPES from 'containers/Sidebar/actionTypes';
 
 const initialState = {
     loading: false,
-    response: null
+    response: null,
+    formData: {}
 };
 
 function SelectedMethodReducer(state = initialState, action) {
@@ -32,9 +33,13 @@ function SelectedMethodReducer(state = initialState, action) {
                 ...state,
                 error: null
             };
-            
+        case ACTION_TYPES.CHANGE_FORM_DATA:
+            return {
+                ...state,
+                formData: action.formData
+            };
         case METHOD_LIST_ACTION_TYPES.SELECT_SERVICE:
-            return initialState;
+            return {...initialState};
         default:
             return state;
     }

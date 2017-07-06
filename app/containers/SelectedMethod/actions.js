@@ -1,8 +1,9 @@
 import * as ACTION_TYPES from './actionTypes';
 
-export const runMethod = (params) => ({
+export const runMethod = (params, raw = false) => ({
     type: ACTION_TYPES.RUN_METHOD,
-    params
+    params,
+    raw
 });
 
 export const runMethodRequest = (params) => ({
@@ -23,3 +24,9 @@ export const runMethodFailure = (error = '') => ({
 export const hideError = () => ({
     type: ACTION_TYPES.HIDE_ERROR
 })
+
+
+export const changeFormData = (formData) => ({
+    type: ACTION_TYPES.CHANGE_FORM_DATA,
+    formData
+});

@@ -16,9 +16,8 @@ function* onRunMethod(action) {
     try {
         const state = yield select();
         
-        const schema = getSchema(state);
         const method = getSelectedMethod(state);
-        const rpcRequestParams = createRequest({ method, params: action.params.formData });
+        const rpcRequestParams = action.raw ? action.params : createRequest({ method, params: action.params.formData });
         const headers = getHeaders(state);
         const endpoint = getEndPoint(state);
         

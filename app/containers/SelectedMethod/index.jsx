@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MethodViewer from 'components/MethodViewer';
 import { getSelectedMethodSchema, getSelectedMethodFullState } from './selectors';
 import { getSelectedMethod } from 'containers/Sidebar/selectors';
-import { runMethod, hideError } from './actions';
+import { runMethod, hideError, changeFormData } from './actions';
 
 export default connect(
     state => ({
@@ -14,6 +14,7 @@ export default connect(
     }),
     {
         runMethod,
-        hideError
+        hideError,
+        changeFormData
     }
 )(MethodViewer);

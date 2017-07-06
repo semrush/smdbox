@@ -90,6 +90,9 @@ class MethodViewer extends React.PureComponent {
                                     loading={this.props.state.loading}
                                     response={this.props.state.response}
                                     hideError={this.props.hideError}
+                                    method={this.props.selectedMethod}
+                                    changeFormData={this.props.changeFormData}
+                                    formData={this.props.state.formData}
                                     error={this.props.state.error}
                                 />
                             </Col>
