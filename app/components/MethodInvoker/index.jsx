@@ -3,7 +3,7 @@ import bemCl from 'bem-cl';
 
 import FormFromSchema from 'components/FormFromSchema';
 import JsonViewer from 'components/JsonViewer';
-import { Alert } from 'react-bootstrap';
+import { Alert, Tab, Tabs } from 'react-bootstrap';
 import './MethodInvoker.scss';
 
 const b = bemCl('sb-method-invoker');
@@ -41,11 +41,22 @@ class MethodInvoker extends React.PureComponent {
     render() {
         return (
             <div className={b()}>
-                <FormFromSchema
-                    schema={this.props.schema}
-                    loading={this.props.loading}
-                    onSubmit={this.handleSubmit}
-                />
+                <Tabs
+                    defaultActiveKey={1}
+                    id="method-invoker-tabs"
+                >
+                    <Tab eventKey={1} title="Form">
+                        <FormFromSchema
+                            schema={this.props.schema}
+                            loading={this.props.loading}
+                            onSubmit={this.handleSubmit}
+                        />
+                    </Tab>
+                    <Tab eventKey={2} title="Raw">
+                        Raw
+                    </Tab>
+                </Tabs>
+                
                 {
                     this.renderResponseIfNeeded()
                 }

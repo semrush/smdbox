@@ -42,7 +42,7 @@ class MethodViewer extends React.PureComponent {
                                             bsStyle="success"
                                             bsSize="xsmall"
                                             onClick={this.showTry}>
-                                            Show test form
+                                            Try it
                                         </Button>
                                     )}
                                     { this.state.showTry && (

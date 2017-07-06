@@ -1,6 +1,10 @@
 import React from 'react';
 import { Table, Tabs, Tab, Alert } from 'react-bootstrap';
 import bemCl from 'bem-cl';
+import map from 'lodash/map';
+
+import ParamsTable from 'components/ParamsTable';
+
 import './MethodDescription.scss';
 
 const b = bemCl('sb-method-description');
@@ -63,96 +67,54 @@ class MethodDescription extends React.PureComponent{
             )
         }
         
+        return <ParamsTable schema={this.props.schema} />
+    }
+    
+    renderOutputTable() {
         return (
             <Table striped bordered condensed hover>
                 <thead>
                 <tr>
-                    <th>Param</th>
-                    <th>Description</th>
                     <th>Type</th>
-                    <th>Required</th>
+                    {
+                        this.props.schema.returns.description && (
+                            <th>Description</th>
+                        )
+                    }
                 </tr>
                 </thead>
                 <tbody>
-                {
-                    Object.keys(this.props.schema.properties).map(
-                        param => this.renderParam(param, this.props.schema.properties)
-                    )
-                }
+                <tr>
+                    <td>{this.props.schema.returns.type}</td>
+                    {
+                        this.props.schema.returns.description && (
+                            <td>{this.props.schema.returns.description}</td>
+                        )
+                    }
+        
+                </tr>
                 </tbody>
             </Table>
-        )
+        );
     }
     
     
     renderOutputParamsIfNeeded() {
-        let showDefinitions = false;
-        let responseType;
-        if (this.props.schema.returns.type === 'array' &&
-            this.props.schema.returns.items &&
-            this.props.schema.returns.items.$ref) {
-            responseType = this.props.schema.returns.items.$ref.split("/").pop();
-            
-            if (this.props.schema.returns.definitions &&
-                this.props.schema.returns.definitions[responseType]) {
-                showDefinitions = this.props.schema.returns.definitions[responseType];
-            }
-        } else if (this.props.schema.returns.type === 'object'
-            && this.props.schema.returns.properties) {
-            responseType = this.props.schema.returns.description || 'returned object';
-            showDefinitions = this.props.schema.returns;
-        }
-        
         return (
             <div className={b('output')}>
                 <h4>Returns:</h4>
-                <Table striped bordered condensed hover>
-                    <thead>
-                    <tr>
-                        <th>Type</th>
-                        {
-                            this.props.schema.returns.description && (
-                                <th>Description</th>
-                            )
-                        }
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{this.props.schema.returns.type}</td>
-                        {
-                            this.props.schema.returns.description && (
-                                <td>{this.props.schema.returns.description}</td>
-                            )
-                        }
-                        
-                    </tr>
-                    </tbody>
-                </Table>
+                { this.renderOutputTable() }
                 
                 {
-                    showDefinitions && (
-                        <div>
-                            <h5>Definition of {responseType}</h5>
-                            <Table striped bordered condensed hover>
-                                <thead>
-                                <tr>
-                                    <th>Param</th>
-                                    <th>Description</th>
-                                    <th>Type</th>
-                                    <th>Required</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    Object.keys(showDefinitions.properties).map(
-                                        param => this.renderParam(param, showDefinitions.properties)
-                                    )
-                                }
-                                </tbody>
-                            </Table>
-                        </div>
-                    )
+                    this.props.schema.returns.definitions &&
+                    map(this.props.schema.returns.definitions, (definition, definitionKey) => {
+                        return (
+                            <div key={definitionKey}>
+                                <h5>Definition of {definitionKey}</h5>
+                                <ParamsTable schema={definition}/>
+                            </div>
+                        )
+                    })
                 }
             </div>
         )
@@ -167,7 +129,7 @@ class MethodDescription extends React.PureComponent{
     
                 <Tabs
                     defaultActiveKey={1}
-                    id="uncontrolled-tab-example"
+                    id="method-viewer-tabs"
                 >
                     <Tab eventKey={1} title="Input">
                         { this.renderInputParamsTableIfNeeded() }
