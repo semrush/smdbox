@@ -31,6 +31,3 @@ tmp/
 
 # Brunch output folder.
 build/
-app/assets/jsConfig.standalone.js
-jsconfig.json
-ui_npm

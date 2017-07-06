@@ -6,9 +6,13 @@ const webpack = require('webpack');
 
 const PUBLIC_PATH = '/';
 const APP_FOLDER = 'app';
-const BUILD_FOLDER = 'build';
+
+const isDist = process.env.NODE_ENV === 'dist';
+const BUILD_FOLDER = isDist ? 'dist' : 'build';
 
 const cssnano = require('cssnano');
+
+
 
 const POSTCSS_LOADER = {
     loader: 'postcss-loader',
@@ -78,7 +82,7 @@ const webpackConfigWidget = {
             root: path.resolve(__dirname, '../'),
             verbose: false
         }),
-        new ExtractTextPlugin('[name].[hash].css'),
+        new ExtractTextPlugin(isDist ? '[name].css' : '[name].[hash].css'),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: `${APP_FOLDER}/assets/html/index.html`,
@@ -106,8 +110,8 @@ const webpackConfigWidget = {
     output: {
         path: path.resolve(process.cwd(), BUILD_FOLDER),
         publicPath: PUBLIC_PATH,
-        filename: '[name].[hash].js',
-        chunkFilename: 'chunk.[name].[hash].js'
+        filename: isDist ? '[name].js' : '[name].[hash].js',
+        chunkFilename: isDist ? 'chunk.[name].js' : 'chunk.[name].[hash].js'
     }
 };
 
