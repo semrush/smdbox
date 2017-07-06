@@ -94,7 +94,7 @@ class RawJsonEditor extends React.PureComponent {
                     }
                     <FormGroup validationState={this.state.valid ? 'success' : 'error'}>
                         <FormControl
-                            className={b('textarea')}
+                            className={b('textarea').toString()}
                             componentClass="textarea"
                             onChange={this.handleInputChange}
                             value={this.state.value}

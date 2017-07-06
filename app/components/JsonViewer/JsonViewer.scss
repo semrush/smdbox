@@ -1,0 +1,17 @@
+@import "app/styles/variables";
+
+.sb-json-viewer{
+    &__clipboard-button{
+        margin-left: 10px;
+        display: inline-block;
+    }
+    &__textarea{
+        textarea{
+
+        }
+        width: 100%;
+        max-width: 100%;
+        resize: vertical;
+        min-height: 300px;
+    }
+}

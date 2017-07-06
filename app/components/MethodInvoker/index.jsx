@@ -39,7 +39,6 @@ class MethodInvoker extends React.PureComponent {
         
         return (
             <div className={b('result')}>
-                <h3>Result</h3>
                 <JsonViewer json={this.props.response} />
             </div>
         );
