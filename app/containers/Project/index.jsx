@@ -3,7 +3,7 @@ import Project from 'components/Project';
 import { create } from './reducer';
 
 export default connect(state => ({
-
+    project: state.project
 }), {
     create
 })(Project)

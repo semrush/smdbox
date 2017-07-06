@@ -4,11 +4,19 @@ import './Application.scss';
 import Project from 'containers/Project';
 import SelectedMethod from 'containers/SelectedMethod';
 import Sidebar from 'containers/Sidebar';
-import { Grid, Col, Row } from 'react-bootstrap';
+import { Grid, Col, Row, Modal } from 'react-bootstrap';
 
 const b = bemCl('sb-application');
 
 class Application extends React.PureComponent {
+    
+    state = {
+        showSettings: false
+    };
+    
+    hideSettings() {
+        this.setState({ showSettings: false })
+    }
     
     render() {
         return (
@@ -22,6 +30,10 @@ class Application extends React.PureComponent {
                         <ul className="nav navbar-nav navbar-right">
                             <li><a href="" onClick={ (e) => {
                                 e.nativeEvent.preventDefault();
+                                this.setState({ showSettings: true })
+                            } }>Settings</a></li>
+                            <li><a href="" onClick={ (e) => {
+                                e.nativeEvent.preventDefault();
                                 this.props.clearProject();
                             } }>Exit</a></li>
                         </ul>
@@ -30,7 +42,7 @@ class Application extends React.PureComponent {
             </nav>
             {
                 this.props.isProjectEmpty &&
-                <Grid>
+                <Grid style={{ paddingTop: '15px' }}>
                     <Project />
                 </Grid>
             }
@@ -45,6 +57,14 @@ class Application extends React.PureComponent {
                             <SelectedMethod />
                         </Col>
                     </Row>
+                    <Modal show={this.state.showSettings} onHide={this.hideSettings.bind(this)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Project settings</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Project mode="settings" onSubmit={ this.hideSettings.bind(this) } />
+                        </Modal.Body>
+                    </Modal>
                 </Grid>
             }
         </div>

@@ -9,7 +9,26 @@ const b = {
     createProject: bem('app-create-project')
 };
 
+const modes = {
+    INIT: 'init',
+    SETTINGS: 'settings'
+};
+
 export default class extends React.Component {
+    
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            smdUrl: this.props.project.smdUrl || '',
+            endpoint: this.props.project.endpoint || '',
+            headers: map(this.props.project.headers, (value = '', key = '') => ({ key, value }))
+        };
+    }
+    
+    static defaultProps = {
+        onSubmit: () => {}
+    };
     
     onSubmit(e) {
         e.preventDefault();
@@ -21,13 +40,8 @@ export default class extends React.Component {
                 return res
             }, {})
         });
+        this.props.onSubmit();
     }
-    
-    state = {
-        smdUrl: null,
-        endpoint: null,
-        headers: []
-    };
     
     addHeader() {
         this.setState({ headers: [ ...this.state.headers, { key: '', value: '' } ] })
@@ -41,64 +55,69 @@ export default class extends React.Component {
     }
     
     render() {
+        const { mode } = this.props;
         return (
             <div className={ b.createProject() }>
-                <div className={ b.createProject('step') }>
-                    <h3>SMD scheme *</h3>
-                    <FormGroup>
-                        <FormControl
-                            onChange={ (e) => this.setState({ smdUrl: e.nativeEvent.target.value }) }
-                        />
-                    </FormGroup>
-                    <h3>Custom headers</h3>
-                    { map(this.state.headers, (header, index) => (
-                        <FormGroup key={ `header-${index}` }>
-                            <Form inline>
-                                <FormGroup>
-                                    <FormControl placeholder="Key" value={ header.key } onChange={ (e) => {
-                                        this.setState({
-                                            headers: map(this.state.headers, (header, headerIndex) => {
-                                                if (headerIndex === index) {
-                                                    return { ...header, key: e.nativeEvent.target.value }
-                                                } else { return header }
-                                            })
-                                        })
-                                    } } />
-                                </FormGroup>
-                                <FormGroup>
-                                    <FormControl placeholder="Value" value={ header.value } onChange={ (e) => {
-                                        this.setState({
-                                            headers: map(this.state.headers, (header, headerIndex) => {
-                                                if (headerIndex === index) {
-                                                    return { ...header, value: e.nativeEvent.target.value }
-                                                } else { return header }
-                                            })
-                                        })
-                                    } } />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Button bsStyle="warning" onClick={ () => this.removeHeader(index) }>
-                                        <Glyphicon glyph="remove" />
-                                    </Button>
-                                </FormGroup>
-                            </Form>
+                { mode !== modes.SETTINGS &&
+                    <div>
+                        <h3>SMD scheme *</h3>
+                        <FormGroup>
+                            <FormControl
+                                onChange={ (e) => this.setState({ smdUrl: e.nativeEvent.target.value }) }
+                                value={ this.state.smdUrl }
+                            />
                         </FormGroup>
-                    )) }
-                    <FormGroup>
-                        <Button onClick={ () => { this.addHeader() } }>Add header</Button>
+                    </div>
+                }
+                <h3>Custom headers</h3>
+                { map(this.state.headers, (header, index) => (
+                    <FormGroup key={ `header-${index}` }>
+                        <Form inline>
+                            <FormGroup>
+                                <FormControl placeholder="Key" value={ header.key } onChange={ (e) => {
+                                    this.setState({
+                                        headers: map(this.state.headers, (header, headerIndex) => {
+                                            if (headerIndex === index) {
+                                                return { ...header, key: e.nativeEvent.target.value }
+                                            } else { return header }
+                                        })
+                                    })
+                                } } />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormControl placeholder="Value" value={ header.value } onChange={ (e) => {
+                                    this.setState({
+                                        headers: map(this.state.headers, (header, headerIndex) => {
+                                            if (headerIndex === index) {
+                                                return { ...header, value: e.nativeEvent.target.value }
+                                            } else { return header }
+                                        })
+                                    })
+                                } } />
+                            </FormGroup>
+                            <FormGroup>
+                                <Button bsStyle="warning" onClick={ () => this.removeHeader(index) }>
+                                    <Glyphicon glyph="remove" />
+                                </Button>
+                            </FormGroup>
+                        </Form>
                     </FormGroup>
-                    <h3>API endpoint for test</h3>
-                    <FormGroup>
-                        <FormControl
-                            onChange={ (e) => this.setState({ endpoint: e.nativeEvent.target.value }) }
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Button bsStyle="success" type="submit" onClick={ this.onSubmit.bind(this) }>
-                            Create
-                        </Button>
-                    </FormGroup>
-                </div>
+                )) }
+                <FormGroup>
+                    <Button onClick={ () => { this.addHeader() } }>Add header</Button>
+                </FormGroup>
+                <h3>API endpoint for test</h3>
+                <FormGroup>
+                    <FormControl
+                        onChange={ (e) => this.setState({ endpoint: e.nativeEvent.target.value }) }
+                        value={ this.state.endpoint }
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Button bsStyle={ mode === modes.SETTINGS ? "primary" : "success" } type="submit" onClick={ this.onSubmit.bind(this) }>
+                        { mode === modes.SETTINGS ? "Update" : "Create" }
+                    </Button>
+                </FormGroup>
             </div>
         )
     }
