@@ -11,7 +11,7 @@
     "build:dll": "NODE_ENV=development BUILDING_DLL=true webpack --config webpack/webpack.dll.js --color -p --progress",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p && NODE_ENV=production node ./index.js",
-    "dist": "NODE_ENV=dist webpack --config webpack/webpack.prod.js --progress -p"
+    "dist": "NODE_ENV=production IS_DIST=true webpack --config webpack/webpack.prod.js --progress -p"
   },
   "dllPlugin": {
     "path": "node_modules/json-rpc-frontend-dlls",

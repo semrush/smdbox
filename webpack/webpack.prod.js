@@ -7,20 +7,16 @@ const webpack = require('webpack');
 const PUBLIC_PATH = '/';
 const APP_FOLDER = 'app';
 
-const isDist = process.env.NODE_ENV === 'dist';
+const isDist = process.env.IS_DIST === 'true';
+
 const BUILD_FOLDER = isDist ? 'dist' : 'build';
-
-const cssnano = require('cssnano');
-
-
 
 const POSTCSS_LOADER = {
     loader: 'postcss-loader',
     options: {
         plugins: () => {
             return [
-                require('autoprefixer'),
-                cssnano({ zindex: false })
+                require('autoprefixer')
             ];
         }
     }
