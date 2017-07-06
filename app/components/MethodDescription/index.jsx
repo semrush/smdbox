@@ -31,7 +31,7 @@ class MethodDescription extends React.PureComponent{
                     {this.resolveType(parent[param].type, parent[param])}
                 </td>
                 <td>
-                    {parent[param].optional ? 'No' : 'Yes'}
+                    {parent[param].optional ? '' : <i className="required-icon glyphicon glyphicon-ok" /> }
                 </td>
             </tr>
         );
@@ -163,7 +163,6 @@ class MethodDescription extends React.PureComponent{
         
         return (
             <div className={b()}>
-                <h2>{this.props.method}</h2>
                 <h4>{this.props.schema.description}</h4>
     
                 <Tabs

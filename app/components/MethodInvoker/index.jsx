@@ -41,7 +41,6 @@ class MethodInvoker extends React.PureComponent {
     render() {
         return (
             <div className={b()}>
-                <h2>Try it out</h2>
                 <FormFromSchema
                     schema={this.props.schema}
                     loading={this.props.loading}
