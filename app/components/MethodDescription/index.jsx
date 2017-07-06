@@ -72,32 +72,59 @@ class MethodDescription extends React.PureComponent{
     
     renderOutputTable() {
         return (
+            <div className={b('output-tables')}>
+                <Table striped bordered condensed hover>
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        {
+                            this.props.schema.returns.description && (
+                                <th>Description</th>
+                            )
+                        }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{this.props.schema.returns.type}</td>
+                        {
+                            this.props.schema.returns.description && (
+                                <td>{this.props.schema.returns.description}</td>
+                            )
+                        }
+            
+                    </tr>
+                    </tbody>
+                </Table>
+            </div>
+        );
+    }
+    
+    renderErrorsTableIfNeeded() {
+        return (
             <Table striped bordered condensed hover>
                 <thead>
                 <tr>
-                    <th>Type</th>
-                    {
-                        this.props.schema.returns.description && (
-                            <th>Description</th>
-                        )
-                    }
+                    <th>Error code</th>
+                    <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{this.props.schema.returns.type}</td>
-                    {
-                        this.props.schema.returns.description && (
-                            <td>{this.props.schema.returns.description}</td>
-                        )
-                    }
-        
-                </tr>
+                {
+                    map(this.props.schema.errors, (errorDescription, errorCode) => {
+                        return (
+                            <tr key={errorCode}>
+                                <td>{errorCode}</td>
+                                <td>{errorDescription}</td>
+                            </tr>
+                        );
+                    })
+                }
+                
                 </tbody>
             </Table>
         );
     }
-    
     
     renderOutputParamsIfNeeded() {
         return (
@@ -137,6 +164,13 @@ class MethodDescription extends React.PureComponent{
                     <Tab eventKey={2} title="Output">
                         { this.renderOutputParamsIfNeeded() }
                     </Tab>
+                    {
+                        this.props.schema.errors && (
+                            <Tab eventKey={3} title="Error codes">
+                                { this.renderErrorsTableIfNeeded() }
+                            </Tab>
+                        )
+                    }
                 </Tabs>
                 
             </div>

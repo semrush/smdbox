@@ -10,7 +10,7 @@
     "lint-staged": "lint-staged",
     "build:dll": "NODE_ENV=development BUILDING_DLL=true webpack --config webpack/webpack.dll.js --color -p --progress",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
-    "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js -p && NODE_ENV=production node ./index.js"
+    "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p && NODE_ENV=production node ./index.js"
   },
   "dllPlugin": {
     "path": "node_modules/json-rpc-frontend-dlls",

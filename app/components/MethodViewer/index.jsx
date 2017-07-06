@@ -47,7 +47,6 @@ class MethodViewer extends React.PureComponent {
                                     )}
                                     { this.state.showTry && (
                                         <Button
-                                            bsStyle="success"
                                             bsSize="xsmall"
                                             onClick={()=>{this.showInfo(false)}}>
                                             Hide
@@ -78,7 +77,6 @@ class MethodViewer extends React.PureComponent {
                                     { this.state.showInfo && (
                                         <Button
                                             bsSize="xsmall"
-                                            bsStyle="success"
                                             onClick={()=>{this.showTry(false)}}>
                                             Hide
                                         </Button>
