@@ -13,10 +13,12 @@ const b = bemCl('sb-json-viewer');
 
 class JsonViewer extends React.PureComponent {
     static propTypes = {
-        json: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+        json: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+        title: PropTypes.string
     };
     static defaultProps = {
-        json: {}
+        json: {},
+        title: 'Response'
     };
     
     getRawJson() {
@@ -35,7 +37,7 @@ class JsonViewer extends React.PureComponent {
         return (
             <div className={b()}>
                 <h4>
-                    Result
+                    {this.props.title}
                     <div className={b('clipboard-button')}>
                         <Button bsSize="xsmall" onClick={this.copyToClipboard}>Copy to clipboard</Button>
                     </div>

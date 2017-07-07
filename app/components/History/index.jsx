@@ -30,10 +30,10 @@ class History extends React.PureComponent {
                 id="history-item-tabs"
             >
                 <Tab eventKey={1} title="Response">
-                    <JsonViewer json={this.props.selectedItem.response} />
+                    <JsonViewer title="Response data" json={this.props.selectedItem.response} />
                 </Tab>
                 <Tab eventKey={2} title="Request params">
-                    <JsonViewer json={this.props.selectedItem.formData} />
+                    <JsonViewer title="Request params" json={this.props.selectedItem.formData} />
                 </Tab>
             </Tabs>
         )
