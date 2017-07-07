@@ -50,10 +50,10 @@ class Application extends React.PureComponent {
                 this.props.isProjectCreated &&
                 <Grid fluid>
                     <Row>
-                        <Col md={3} style={{ height: 'calc(100vh - 64px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>
+                        <Col md={3} style={{ height: 'calc(100vh - 51px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>
                             <Sidebar />
                         </Col>
-                        <Col md={9} style={{ height: 'calc(100vh - 64px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>
+                        <Col md={9} style={{ height: 'calc(100vh - 51px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>
                             <SelectedMethod />
                         </Col>
                     </Row>
