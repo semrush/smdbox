@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint ./app --ext .js --ext .jsx",
     "lint-staged": "lint-staged",
+    "postinstall": "yarn run build:dll",
     "build:dll": "NODE_ENV=development BUILDING_DLL=true webpack --config webpack/webpack.dll.js --color -p --progress",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p && NODE_ENV=production node ./index.js",
@@ -19,7 +20,6 @@
   },
   "dependencies": {
     "add-asset-html-webpack-plugin": "^1.0.2",
-    "antd": "^2.11.2",
     "axios": "^0.16.2",
     "babel-cli": "6.18.0",
     "babel-core": "6.21.0",
@@ -60,7 +60,6 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",
-    "react-autosuggest": "^9.0.1",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^3.0.0-beta.6",
