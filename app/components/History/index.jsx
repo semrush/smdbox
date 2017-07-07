@@ -1,6 +1,6 @@
 import React from 'react';
 import bemCl from 'bem-cl';
-import { Grid, Col, Row } from 'react-bootstrap';
+import { Grid, Col, Row, Tabs, Tab } from 'react-bootstrap';
 
 import JsonViewer from 'components/JsonViewer';
 
@@ -25,7 +25,17 @@ class History extends React.PureComponent {
     renderSelectedItem = () => {
         if (!this.props.selectedItem) return null;
         return (
-            <JsonViewer json={this.props.selectedItem.response} />
+            <Tabs
+                defaultActiveKey={1}
+                id="history-item-tabs"
+            >
+                <Tab eventKey={1} title="Response">
+                    <JsonViewer json={this.props.selectedItem.response} />
+                </Tab>
+                <Tab eventKey={2} title="Request data">
+                    <JsonViewer json={this.props.selectedItem.formData} />
+                </Tab>
+            </Tabs>
         )
     };
     
