@@ -1,0 +1,17 @@
+.navbar{
+    $padding: 13px;
+    min-height: 50px;
+
+    .navbar-brand{
+        height: auto;
+        padding-top: $padding;
+        padding-bottom: $padding;
+    }
+    .navbar-nav{
+        li>a{
+            padding-top: $padding;
+            padding-bottom: $padding;
+        }
+    }
+
+}

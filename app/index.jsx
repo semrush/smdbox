@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import Application from 'containers/Application';
 import configureStore from './configureStore';
 
+import 'styles/main.scss';
+
 const rootNode = document.querySelector('#json-rpc-root');
 const store = configureStore(JSON.parse(localStorage.getItem('smdBox')) || {});
 
