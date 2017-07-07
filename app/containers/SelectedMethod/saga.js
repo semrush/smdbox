@@ -23,6 +23,11 @@ function* onRunMethod(action) {
         
         yield put(Actions.runMethodRequest());
         const response = yield call(axios.post, endpoint, rpcRequestParams, { headers });
+        
+        if (response.data.error) {
+            yield put(Actions.runMethodFailure(response.data.error));
+            return;
+        }
         yield put(Actions.runMethodSuccess(response.data.result));
     } catch(e) {
         yield put(Actions.runMethodFailure(e));

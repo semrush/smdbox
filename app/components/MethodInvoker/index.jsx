@@ -31,7 +31,16 @@ class MethodInvoker extends React.PureComponent {
         if (this.props.error && this.props.error.message) {
             return (
                 <Alert bsStyle="danger" onDismiss={this.props.hideError}>
-                    {this.props.error.message}
+                    <div>
+                        {this.props.error.message}
+                    </div>
+                    {
+                        this.props.error.data && (
+                            <div>
+                                {this.props.error.data}
+                            </div>
+                        )
+                    }
                 </Alert>
             );
         }
