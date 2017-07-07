@@ -1,10 +1,13 @@
 import React from 'react';
 import bemCl from 'bem-cl';
-import './Application.scss';
+
 import Project from 'containers/Project';
 import SelectedMethod from 'containers/SelectedMethod';
+import History from 'containers/History';
 import Sidebar from 'containers/Sidebar';
 import { Grid, Col, Row, Modal } from 'react-bootstrap';
+
+import './Application.scss';
 
 const b = bemCl('sb-application');
 
@@ -20,7 +23,7 @@ class Application extends React.PureComponent {
     };
     
     hideHistory = () => {
-        this.setState({ showHistory: false })
+        this.setState({ showHistory: false });
     };
     showHistory = () => {
         this.setState({ showHistory: true })
@@ -36,6 +39,10 @@ class Application extends React.PureComponent {
                     </div>
                     { this.props.isProjectCreated &&
                         <ul className="nav navbar-nav navbar-right">
+                            <li><a href="" onClick={ (e) => {
+                                e.nativeEvent.preventDefault();
+                                this.showHistory();
+                            } }>History</a></li>
                             <li><a href="" onClick={ (e) => {
                                 e.nativeEvent.preventDefault();
                                 this.setState({ showSettings: true })
@@ -74,12 +81,12 @@ class Application extends React.PureComponent {
                         </Modal.Body>
                     </Modal>
     
-                    <Modal show={this.state.showHistory} onHide={this.hideHistory}>
+                    <Modal show={this.state.showHistory} onHide={this.hideHistory} bsSize="large">
                         <Modal.Header closeButton>
                             <Modal.Title>Request history</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            
+                            <History />
                         </Modal.Body>
                     </Modal>
                 </Grid>

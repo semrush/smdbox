@@ -5,3 +5,12 @@ export const save = (params) => ({
     params
 });
 
+export const selectItem = (item) => ({
+    type: ACTION_TYPES.SELECT_ITEM,
+    item
+});
+
+export const clearItem = () => ({
+    type: ACTION_TYPES.CLEAR_ITEM
+});
+

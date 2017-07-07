@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import application from 'containers/Application/reducer';
 import project from 'containers/Project/reducer';
 import sidebar from 'containers/Sidebar/reducer';
-// import history from 'containers/History/reducer';
+import history from 'containers/History/reducer';
 import selectedMethod from 'containers/SelectedMethod/reducer';
 
 const rootReducer = combineReducers({
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     project,
     sidebar,
     selectedMethod,
-    // history
+    history
 });
 
 export default rootReducer;
