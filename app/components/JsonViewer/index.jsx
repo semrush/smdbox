@@ -34,12 +34,12 @@ class JsonViewer extends React.PureComponent {
     render() {
         return (
             <div className={b()}>
-                <h3>
+                <h4>
                     Result
                     <div className={b('clipboard-button')}>
                         <Button bsSize="xsmall" onClick={this.copyToClipboard}>Copy to clipboard</Button>
                     </div>
-                </h3>
+                </h4>
                 <Tabs
                     defaultActiveKey={1}
                     id="json-viewer-tabs"

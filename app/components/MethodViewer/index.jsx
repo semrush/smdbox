@@ -35,7 +35,7 @@ class MethodViewer extends React.PureComponent {
                     {
                         this.state.showInfo && (
                             <Col md={this.state.showTry ? 7 : 12}>
-                                <h2>
+                                <h3>
                                     {this.props.selectedMethod}
                                     { !this.state.showTry && (
                                         <Button
@@ -52,7 +52,7 @@ class MethodViewer extends React.PureComponent {
                                             Hide
                                         </Button>
                                     )}
-                                </h2>
+                                </h3>
                                 <MethodDescription
                                     method={this.props.selectedMethod}
                                     schema={this.props.methodSchema}
@@ -64,7 +64,7 @@ class MethodViewer extends React.PureComponent {
                     {
                         this.state.showTry && (
                             <Col md={this.state.showInfo ? 5 : 12}>
-                                <h2>
+                                <h3>
                                     Try it out
                                     { !this.state.showInfo && (
                                         <Button
@@ -81,7 +81,7 @@ class MethodViewer extends React.PureComponent {
                                             Hide
                                         </Button>
                                     )}
-                                </h2>
+                                </h3>
                                 <MethodInvoker
                                     schema={this.props.methodSchema}
                                     runMethod={this.props.runMethod}

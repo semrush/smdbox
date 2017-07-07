@@ -10,7 +10,7 @@ const Namespace = ({ namespaceName, children }) => {
     
     return (
         <div className="sb-sidebar__namespace">
-            { namespaceName && <div className="h3">{ namespaceName }</div> }
+            { namespaceName && <div className="h4">{ namespaceName }</div> }
             <ul className="nav nav-pills nav-stacked">
                 { children }
             </ul>

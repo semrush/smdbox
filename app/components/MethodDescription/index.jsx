@@ -152,7 +152,7 @@ class MethodDescription extends React.PureComponent{
         
         return (
             <div className={b()}>
-                <h4>{this.props.schema.description}</h4>
+                <h5>{this.props.schema.description}</h5>
     
                 <Tabs
                     defaultActiveKey={1}

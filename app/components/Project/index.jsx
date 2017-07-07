@@ -72,16 +72,17 @@ export default class extends React.Component {
             <div className={ b.createProject() }>
                 { mode !== modes.SETTINGS &&
                     <div>
-                        <h3>SMD scheme *</h3>
+                        <h4>SMD scheme *</h4>
                         <FormGroup validationState={ this.props.fetchingSmdError ? 'error' : this.props.smdScheme !== null ? 'success' : null }>
                             <FormControl
+                                placeholder="Enter SMD scheme url"
                                 disabled={ this.props.fetchingSchema }
                                 onChange={ (e) => { e.persist(); this.fetchSmd(e.nativeEvent.target.value) } }
                             />
                         </FormGroup>
                     </div>
                 }
-                <h3>Custom headers</h3>
+                <h4>Custom headers</h4>
                 { map(this.state.headers, (header, index) => (
                     <FormGroup key={ `header-${index}` }>
                         <Form inline>
@@ -118,9 +119,10 @@ export default class extends React.Component {
                 <FormGroup>
                     <Button onClick={ () => { this.addHeader() } }>Add header</Button>
                 </FormGroup>
-                <h3>API endpoint for test</h3>
+                <h4>API endpoint for test</h4>
                 <FormGroup>
                     <FormControl
+                        placeholder="Enter endpoint url"
                         onChange={ (e) => this.setState({ endpoint: e.nativeEvent.target.value }) }
                         value={ this.state.endpoint }
                     />
