@@ -127,6 +127,13 @@ class MethodDescription extends React.PureComponent{
     }
     
     renderOutputParamsIfNeeded() {
+        if (!this.props.schema.returns || !this.props.schema.returns.type) {
+            return (
+                <Alert bsStyle="warning">
+                    No output specified in documentation
+                </Alert>
+            );
+        }
         return (
             <div className={b('output')}>
                 <h4>Returns:</h4>
