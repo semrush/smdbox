@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Project from 'components/Project';
-import { create, fetchSmd } from './reducer';
+import { create, fetchSmd } from './actions';
 import pick from 'lodash/pick'
 
 export default connect(state => ({

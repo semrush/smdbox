@@ -11,12 +11,20 @@ const b = bemCl('sb-application');
 class Application extends React.PureComponent {
     
     state = {
-        showSettings: false
+        showSettings: false,
+        showHistory: false,
     };
     
-    hideSettings() {
+    hideSettings = () => {
         this.setState({ showSettings: false })
-    }
+    };
+    
+    hideHistory = () => {
+        this.setState({ showHistory: false })
+    };
+    showHistory = () => {
+        this.setState({ showHistory: true })
+    };
     
     render() {
         return (
@@ -63,6 +71,15 @@ class Application extends React.PureComponent {
                         </Modal.Header>
                         <Modal.Body>
                             <Project mode="settings" onSubmit={ this.hideSettings.bind(this) } />
+                        </Modal.Body>
+                    </Modal>
+    
+                    <Modal show={this.state.showHistory} onHide={this.hideHistory}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Request history</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            
                         </Modal.Body>
                     </Modal>
                 </Grid>

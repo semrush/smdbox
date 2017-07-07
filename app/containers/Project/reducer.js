@@ -11,17 +11,7 @@ const initialState = {
     fetchingSmdError: false
 };
 
-export function fetchSmd(url) {
-    return { type: ACTION_TYPES.FETCH, url }
-}
 
-export function create(params) {
-    return { type: ACTION_TYPES.CREATE, params }
-}
-
-export function clearProject() {
-    return { type: ACTION_TYPES.CLEAR }
-}
 
 function createProjectReducer(state = initialState, action) {
     switch (action.type) {

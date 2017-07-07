@@ -28,14 +28,19 @@ function* onRunMethod(action) {
             yield put(Actions.runMethodFailure(response.data.error));
             return;
         }
+        
         yield put(Actions.runMethodSuccess(response.data.result));
     } catch(e) {
         yield put(Actions.runMethodFailure(e));
     }
 }
 
+function* onRunMethodSuccess(action) {
+    
+}
 export default function* SelectedMethodSaga() {
     yield [
         takeEvery(ACTION_TYPES.RUN_METHOD, onRunMethod),
+        takeEvery(ACTION_TYPES.RUN_METHOD_SUCCESS, onRunMethodSuccess),
     ];
 }
