@@ -42,10 +42,9 @@ export default class extends React.Component {
         this.props.fetchSmd(url);
     }
     
-    onSubmit(e) {
+    onSubmit = (e) => {
         e.preventDefault();
         this.props.create({
-            smdUrl: this.state.smdUrl,
             endpoint: this.state.endpoint,
             headers: reduce(this.state.headers, (res, header) => {
                 if (header.key && header.value) { res[header.key] = header.value }
@@ -53,7 +52,11 @@ export default class extends React.Component {
             }, {})
         });
         this.props.onSubmit();
-    }
+    };
+    
+    onRefresh = () => {
+        this.fetchSmd(this.props.smdUrl);
+    };
     
     addHeader() {
         this.setState({ headers: [ ...this.state.headers, { key: '', value: '' } ] })
@@ -131,11 +134,24 @@ export default class extends React.Component {
                     <Button
                         bsStyle={ mode === modes.SETTINGS ? "primary" : "success" }
                         type="submit"
-                        onClick={ this.onSubmit.bind(this) }
+                        onClick={ this.onSubmit }
                         disabled={ this.props.smdScheme === null }
                     >
                         { mode === modes.SETTINGS ? "Update" : "Create" }
                     </Button>
+                    {
+                        mode === modes.SETTINGS && (
+                            <Button
+                                bsStyle={ "default" }
+                                type="button"
+                                onClick={ this.onRefresh }
+                                disabled={ this.props.smdScheme === null || this.props.fetchingSchema}
+                            >
+                                { this.props.fetchingSchema ? "...Refreshing..." : "Refresh SMD schema" }
+                            </Button>
+                        )
+                    }
+                    
                 </FormGroup>
             </div>
         )

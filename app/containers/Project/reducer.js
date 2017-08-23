@@ -30,7 +30,11 @@ function createProjectReducer(state = initialState, action) {
     case ACTION_TYPES.FETCH_ERROR:
         return { ...state, fetchingSchema: false, fetchingSmdError: true };
     case ACTION_TYPES.CREATE:
-        return { ...state, ...action.params, created: true };
+        return {
+            ...state,
+            ...action.params,
+            created: true
+        };
     case ACTION_TYPES.CLEAR:
         return { ...initialState };
     default:

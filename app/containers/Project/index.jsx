@@ -4,7 +4,7 @@ import { create, fetchSmd } from './actions';
 import pick from 'lodash/pick'
 
 export default connect(state => ({
-    ...pick(state.project, 'headers', 'endpoint', 'fetchingSchema', 'smdScheme', 'fetchingSmdError')
+    ...pick(state.project, 'headers', 'endpoint', 'fetchingSchema', 'smdScheme', 'fetchingSmdError', 'smdUrl')
 }), {
     create,
     fetchSmd
