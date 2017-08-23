@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { syncStore } from 'helpers/session';
 
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
@@ -30,9 +31,7 @@ export default function (initialData) {
         )
     );
     
-    store.subscribe(() =>
-        localStorage.setItem('smdBox', JSON.stringify(store.getState()))
-    )
+    syncStore(store);
 
     sagaMiddleware.run(rootSaga);
 

@@ -3,15 +3,19 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import Application from 'containers/Application';
+import { get as getStore } from 'helpers/session';
 import configureStore from './configureStore';
 
 import 'styles/main.scss';
 
 const rootNode = document.querySelector('#json-rpc-root');
-const store = configureStore(JSON.parse(localStorage.getItem('smdBox')) || {});
 
+getStore( (storeData) => {
+    const store = configureStore(storeData || {});
+    renderApp(Application, store);
+});
 
-const renderApp = App =>
+const renderApp = (App, store) =>
     render(
         <Provider store={store}>
             <App key={Date.now()} />
@@ -19,7 +23,6 @@ const renderApp = App =>
         rootNode
     );
 
-renderApp(Application);
 
 if (module.hot) {
     module.hot.accept(['containers/Application'], () => {
