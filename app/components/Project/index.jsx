@@ -25,7 +25,7 @@ export default class extends React.Component {
             headers: map(this.props.headers, (value = '', key = '') => ({ key, value }))
         };
     
-        this.fetchSmd = debounce(this.fetchSmd.bind(this), 500);
+        this.fetchSmd = debounce(this.fetchSmd.bind(this), 800);
     }
     
     static defaultProps = {

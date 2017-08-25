@@ -1,15 +1,15 @@
 import { createRequest } from 'helpers/rpc';
 
 const smdToSchema = (smd) => {
-    
     const P = {
         ...smd,
-        properties: {}
+        properties: {},
+        definitions: {}
     };
-    
     smd.parameters.forEach((param) => {
         P.properties[param.name] = param;
         P.properties[param.name].title = param.name;
+        P.definitions = {...P.definitions, ...param.definitions};
     });
     P.type = "object";
     P.description = smd.description;
