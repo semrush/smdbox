@@ -1,0 +1,540 @@
+{
+  "transport": "POST",
+  "envelope": "JSON-RPC-2.0",
+  "contentType": "application/json",
+  "SMDVersion": "2.0",
+  "target": "/",
+  "services": {
+    "Divide": {
+      "description": "Divide divides two numbers.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "optional": true,
+        "properties": {
+          "Quo": {
+            "type": "integer",
+            "description": "Quo docs"
+          },
+          "rem": {
+            "type": "integer",
+            "description": "Rem docs"
+          }
+        }
+      },
+      "errors": {
+        "-32603": "divide by zero",
+        "401": "we do not serve 1"
+      }
+    },
+    "DoSomething": {
+      "description": "",
+      "parameters": [],
+      "returns": {}
+    },
+    "Multiply": {
+      "description": "Multiply multiples two digits and returns result.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      }
+    },
+    "Pi": {
+      "description": "PI returns math.Pi.",
+      "parameters": [],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "Positive": {
+      "description": "",
+      "parameters": [],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "Pow": {
+      "description": "Pow returns x**y, the base-x exponential of y. If Exp is not set then default value is 2.",
+      "parameters": [
+        {
+          "name": "base",
+          "type": "number"
+        },
+        {
+          "name": "exp",
+          "type": "number",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "Sum": {
+      "description": "Sum sums two digits and returns error with error code as result and IP from context.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "SumArray": {
+      "description": "SumArray returns sum all items from array",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "array",
+          "optional": true,
+          "items": {
+            "type": "number"
+          }
+        }
+      ],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "arith.Divide": {
+      "description": "Divide divides two numbers.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "optional": true,
+        "properties": {
+          "Quo": {
+            "type": "integer",
+            "description": "Quo docs"
+          },
+          "rem": {
+            "type": "integer",
+            "description": "Rem docs"
+          }
+        }
+      },
+      "errors": {
+        "-32603": "divide by zero",
+        "401": "we do not serve 1"
+      }
+    },
+    "arith.DoSomething": {
+      "description": "",
+      "parameters": [],
+      "returns": {}
+    },
+    "arith.Multiply": {
+      "description": "Multiply multiples two digits and returns result.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      }
+    },
+    "arith.Pi": {
+      "description": "PI returns math.Pi.",
+      "parameters": [],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "arith.Positive": {
+      "description": "",
+      "parameters": [],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "arith.Pow": {
+      "description": "Pow returns x**y, the base-x exponential of y. If Exp is not set then default value is 2.",
+      "parameters": [
+        {
+          "name": "base",
+          "type": "number"
+        },
+        {
+          "name": "exp",
+          "type": "number",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "arith.Sum": {
+      "description": "Sum sums two digits and returns error with error code as result and IP from context.",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "integer"
+        },
+        {
+          "name": "b",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "arith.SumArray": {
+      "description": "SumArray returns sum all items from array",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "array",
+          "optional": true,
+          "items": {
+            "type": "number"
+          }
+        }
+      ],
+      "returns": {
+        "type": "number"
+      }
+    },
+    "phonebook.ById": {
+      "description": "ById returns Person from DB.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "optional": true,
+        "properties": {
+          "Addresses": {
+            "type": "array",
+            "description": "Addresses Could be nil or len() == 0.",
+            "items": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "Deleted": {
+            "type": "boolean",
+            "description": "Deleted is flag for"
+          },
+          "FirstName": {
+            "type": "string"
+          },
+          "ID": {
+            "type": "integer",
+            "description": "ID is Unique Identifier for person"
+          },
+          "LastName": {
+            "type": "string"
+          },
+          "Mobile": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "Phone": {
+            "type": "string",
+            "description": "Phone is main phone"
+          },
+          "WorkPhone": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "definitions": {
+          "Address": {
+            "properties": {
+              "City": {
+                "type": "string"
+              },
+              "Street": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "errors": {
+        "404": "person was not found"
+      }
+    },
+    "phonebook.Delete": {
+      "description": "Delete marks person as deleted.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "boolean"
+      }
+    },
+    "phonebook.Get": {
+      "description": "Get returns all people from DB.",
+      "parameters": [
+        {
+          "name": "search",
+          "type": "object",
+          "properties": {
+            "ByAddress": {
+              "type": "object",
+              "$ref": "#/definitions/Address"
+            },
+            "ByName": {
+              "type": "string",
+              "description": "ByName is filter for searching person by first name or last name."
+            },
+            "ByPhone": {
+              "type": "string"
+            },
+            "ByType": {
+              "type": "string"
+            }
+          },
+          "definitions": {
+            "Address": {
+              "properties": {
+                "City": {
+                  "type": "string"
+                },
+                "Street": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "page",
+          "type": "integer",
+          "optional": true
+        },
+        {
+          "name": "count",
+          "type": "integer",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "array",
+        "definitions": {
+          "Address": {
+            "properties": {
+              "City": {
+                "type": "string"
+              },
+              "Street": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "items": {
+          "$ref": "#/definitions/Person"
+        }
+      }
+    },
+    "phonebook.Remove": {
+      "description": "Removes deletes person from DB.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "integer"
+        }
+      ],
+      "returns": {
+        "type": "boolean",
+        "description": "operation result"
+      }
+    },
+    "phonebook.Save": {
+      "description": "Save saves person to DB.",
+      "parameters": [
+        {
+          "name": "p",
+          "type": "object",
+          "properties": {
+            "Addresses": {
+              "type": "array",
+              "description": "Addresses Could be nil or len() == 0.",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            },
+            "Deleted": {
+              "type": "boolean",
+              "description": "Deleted is flag for"
+            },
+            "FirstName": {
+              "type": "string"
+            },
+            "ID": {
+              "type": "integer",
+              "description": "ID is Unique Identifier for person"
+            },
+            "LastName": {
+              "type": "string"
+            },
+            "Mobile": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Phone": {
+              "type": "string",
+              "description": "Phone is main phone"
+            },
+            "WorkPhone": {
+              "type": "string"
+            },
+            "address": {
+              "type": "object",
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "definitions": {
+            "Address": {
+              "properties": {
+                "City": {
+                  "type": "string"
+                },
+                "Street": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "replace",
+          "type": "boolean",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "integer"
+      },
+      "errors": {
+        "400": "invalid request",
+        "401": "use replace=true"
+      }
+    },
+    "phonebook.ValidateSearch": {
+      "description": "ValidateSearch returns given search as result.",
+      "parameters": [
+        {
+          "name": "search",
+          "type": "object",
+          "optional": true,
+          "properties": {
+            "ByAddress": {
+              "type": "object",
+              "$ref": "#/definitions/Address"
+            },
+            "ByName": {
+              "type": "string",
+              "description": "ByName is filter for searching person by first name or last name."
+            },
+            "ByPhone": {
+              "type": "string"
+            },
+            "ByType": {
+              "type": "string"
+            }
+          },
+          "definitions": {
+            "Address": {
+              "properties": {
+                "City": {
+                  "type": "string"
+                },
+                "Street": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "returns": {
+        "type": "object",
+        "optional": true,
+        "properties": {
+          "ByAddress": {
+            "type": "object",
+            "$ref": "#/definitions/Address"
+          },
+          "ByName": {
+            "type": "string",
+            "description": "ByName is filter for searching person by first name or last name."
+          },
+          "ByPhone": {
+            "type": "string"
+          },
+          "ByType": {
+            "type": "string"
+          }
+        },
+        "definitions": {
+          "Address": {
+            "properties": {
+              "City": {
+                "type": "string"
+              },
+              "Street": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

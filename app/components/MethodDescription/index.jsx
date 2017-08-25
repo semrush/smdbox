@@ -67,7 +67,25 @@ class MethodDescription extends React.PureComponent{
             )
         }
         
-        return <ParamsTable schema={this.props.schema} />
+        return (
+            <div>
+                <h4>Input params</h4>
+                <ParamsTable schema={this.props.schema} />
+                {
+                    this.props.schema.parameters && this.props.schema.parameters.length &&
+                    this.props.schema.parameters.map(param => {
+                        return map(param.definitions, (definition, definitionKey) => {
+                            return (
+                                <div key={definitionKey}>
+                                    <h5>Definition of {definitionKey}</h5>
+                                    <ParamsTable schema={definition}/>
+                                </div>
+                            )
+                        })
+                    })
+                }
+            </div>
+        );
     }
     
     renderOutputTable() {

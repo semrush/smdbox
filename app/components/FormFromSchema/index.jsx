@@ -27,9 +27,12 @@ class FormFromSchema extends React.PureComponent {
         this.props.onChange(data.formData);
     };
     
+    handleError = (error) => {
+        console.log(error);
+    };
+    
     render() {
         if (!this.props.schema) return null;
-        
         return (
             <div className={b()}>
                 <Form
@@ -37,6 +40,7 @@ class FormFromSchema extends React.PureComponent {
                     formData={this.props.formData}
                     onChange={this.handleFormChange}
                     onSubmit={this.props.onSubmit}
+                    onError={this.handleError}
                 >
                     <Button type="submit" bsStyle="success">
                         Try
