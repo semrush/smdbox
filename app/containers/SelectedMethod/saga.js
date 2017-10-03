@@ -31,12 +31,12 @@ function* onRunMethod(action) {
         
         yield put(Actions.runMethodSuccess(response.data.result));
     } catch(e) {
-        yield put(Actions.runMethodFailure(e));
+        yield put(Actions.runMethodFailure({message: e.toString()}));
     }
 }
 
 function* onRunMethodSuccess(action) {
-    
+
 }
 export default function* SelectedMethodSaga() {
     yield [
