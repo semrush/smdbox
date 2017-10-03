@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep';
 
 export const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 export const IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
@@ -49,6 +50,15 @@ export const write = (data) => {
 
 export const syncStore = (store) => {
     store.subscribe( () => {
-        write(store.getState());
+        // remove formData from store
+        let stateData = cloneDeep(store.getState());
+        
+        // hotfix - react-json-schema cannot restore object values. Do not save formData
+        if (stateData.selectedMethod &&
+            stateData.selectedMethod.formData &&
+            Object.keys(stateData.selectedMethod.formData).length) {
+            stateData.selectedMethod.formData = {};
+        }
+        write(stateData);
     })
 }

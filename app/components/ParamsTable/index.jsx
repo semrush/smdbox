@@ -76,7 +76,7 @@ class ParamsTable extends React.PureComponent{
                 </thead>
                 <tbody>
                 {
-                    Object.keys(this.props.schema.properties).map(
+                    this.props.schema && this.props.schema.properties && Object.keys(this.props.schema.properties).map(
                         param => this.renderParam(param, this.props.schema.properties)
                     )
                 }

@@ -10,6 +10,17 @@ const smdToSchema = (smd) => {
         P.properties[param.name] = param;
         P.properties[param.name].title = param.name;
         P.definitions = {...P.definitions, ...param.definitions};
+        
+        // TODO remove manual cutting of wrong definitions
+        for(let i of Object.keys(P.definitions)) {
+            let def = P.definitions[i];
+    
+            for(let j of Object.keys(def.properties)) {
+                if( def.properties[j].$ref === '#/definitions/') {
+                    def.properties[j] = {type: "string"}
+                }
+            }
+        }
     });
     P.type = "object";
     P.description = smd.description;
