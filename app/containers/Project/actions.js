@@ -1,9 +1,10 @@
 import * as ACTION_TYPES from './actionTypes';
 
-export function fetchSmd(url) {
+export function fetchSmd(url, isRefresh = false) {
     return {
         type: ACTION_TYPES.FETCH,
-        url
+        url,
+        isRefresh
     }
 }
 
@@ -20,3 +21,15 @@ export function clearProject() {
     }
 }
 
+
+export function openSettings() {
+    return {
+        type: ACTION_TYPES.OPEN_SETTINGS
+    }
+}
+
+export function closeSettings() {
+    return {
+        type: ACTION_TYPES.CLOSE_SETTINGS
+    }
+}

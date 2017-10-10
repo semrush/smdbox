@@ -14,12 +14,11 @@ const b = bemCl('sb-application');
 class Application extends React.PureComponent {
     
     state = {
-        showSettings: false,
         showHistory: false,
     };
     
     hideSettings = () => {
-        this.setState({ showSettings: false })
+        this.props.closeSettings();
     };
     
     hideHistory = () => {
@@ -45,7 +44,7 @@ class Application extends React.PureComponent {
                             } }>History</a></li>
                             <li><a href="" onClick={ (e) => {
                                 e.nativeEvent.preventDefault();
-                                this.setState({ showSettings: true })
+                                this.props.openSettings();
                             } }>Settings</a></li>
                             <li><a href="" onClick={ (e) => {
                                 e.nativeEvent.preventDefault();
@@ -72,12 +71,12 @@ class Application extends React.PureComponent {
                             <SelectedMethod />
                         </Col>
                     </Row>
-                    <Modal show={this.state.showSettings} onHide={this.hideSettings.bind(this)}>
+                    <Modal show={this.props.settingsOpen} onHide={this.hideSettings}>
                         <Modal.Header closeButton>
                             <Modal.Title>Project settings</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Project mode="settings" onSubmit={ this.hideSettings.bind(this) } />
+                            <Project mode="settings" onSubmit={ this.hideSettings } />
                         </Modal.Body>
                     </Modal>
     

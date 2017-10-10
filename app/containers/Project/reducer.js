@@ -22,7 +22,7 @@ function createProjectReducer(state = initialState, action) {
         return { ...state,
             smdScheme: action.smdScheme,
             smdUrl: action.smdUrl,
-            endpoint: `${url.origin}${action.smdScheme.target}`,
+            endpoint: action.isRefresh ? state.endpoint : `${url.origin}${action.smdScheme.target}`,
             fetchingSchema: false,
             fetchingSmdError: false
         };
@@ -35,8 +35,19 @@ function createProjectReducer(state = initialState, action) {
             ...action.params,
             created: true
         };
+    case ACTION_TYPES.OPEN_SETTINGS:
+        return {
+            ...state,
+            settingsOpen: true
+        };
+    case ACTION_TYPES.CLOSE_SETTINGS:
+        return {
+            ...state,
+            settingsOpen: false
+        };
     case ACTION_TYPES.CLEAR:
         return { ...initialState };
+        
     default:
         return state;
     }

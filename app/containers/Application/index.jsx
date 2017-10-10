@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import Application from 'components/Application';
-import { clearProject } from '../Project/actions';
+import { clearProject, openSettings, closeSettings } from '../Project/actions';
 
 export default connect(
     state => ({
-        isProjectCreated: state.project.created
+        isProjectCreated: state.project.created,
+        settingsOpen: state.project.settingsOpen,
     }),
     {
-        clearProject
+        clearProject,
+        openSettings,
+        closeSettings
     }
 )(Application)

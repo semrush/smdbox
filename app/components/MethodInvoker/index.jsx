@@ -1,9 +1,11 @@
 import React from 'react';
 import bemCl from 'bem-cl';
+import isUndefined from 'lodash/isUndefined';
 
 import FormFromSchema from 'components/FormFromSchema';
 import RawJsonEditor from 'components/RawJsonEditor';
 import JsonViewer from 'components/JsonViewer';
+
 
 import { Alert, Tab, Tabs } from 'react-bootstrap';
 import './MethodInvoker.scss';
@@ -44,7 +46,7 @@ class MethodInvoker extends React.PureComponent {
                 </Alert>
             );
         }
-        if (!this.props.response) return null;
+        if (isUndefined(this.props.response)) return null;
         
         return (
             <div className={b('result')}>

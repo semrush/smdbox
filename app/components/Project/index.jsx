@@ -38,8 +38,8 @@ export default class extends React.Component {
         }
     }
     
-    fetchSmd(url) {
-        this.props.fetchSmd(url);
+    fetchSmd(url, isRefresh = false) {
+        this.props.fetchSmd(url, isRefresh);
     }
     
     onSubmit = (e) => {
@@ -55,7 +55,7 @@ export default class extends React.Component {
     };
     
     onRefresh = () => {
-        this.fetchSmd(this.props.smdUrl);
+        this.fetchSmd(this.props.smdUrl, true);
     };
     
     addHeader() {
