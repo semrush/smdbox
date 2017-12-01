@@ -8,10 +8,6 @@ import { getSchema, getHeaders, getEndPoint } from 'containers/Project/selectors
 import { getSelectedMethod } from 'containers/Sidebar/selectors';
 import { createRequest } from 'helpers/rpc';
 
-
-
-const TMP_URL = 'http://riderhelp.ru';
-
 function* onRunMethod(action) {
     try {
         const state = yield select();

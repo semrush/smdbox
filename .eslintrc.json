@@ -1,0 +1,48 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "__DEV__": true,
+    "__PROD__": true,
+    "__STANDALONE__": true,
+    "Backbone": true,
+    "shallow": true,
+    "mount": true
+  },
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": ["error", 4],
+    "import/extensions": 0,
+    "max-len": [2, 120],
+    "global-require": 0,
+    "comma-dangle": 0,
+    "react/prefer-stateless-function": 0,
+    "arrow-body-style": 0,
+    "import/no-unresolved": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-indent": [2, 4],
+    "react/jsx-indent-props": [2, 4],
+    "react/forbid-prop-types": 0,
+    "class-methods-use-this": 0,
+    "no-mixed-operators": 0,
+    "no-unused-expressions": 0,
+    "react/sort-comp": 0,
+    "jsx-a11y": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/no-noninteractive-tabindex": 0,
+    "jsx-a11y/href-no-hash": "off",
+    "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "import/prefer-default-export": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack/webpack.standalone.js"
+      }
+    }
+  }
+}
