@@ -1,13 +1,11 @@
-import * as ACTION_TYPES from './actionTypes';
-
 const initialState = {
-  initialized: false
+    initialized: false
 };
 
 function appReducer(state = initialState, action) {
     switch (action.type) {
-        default:
-            return state;
+    default:
+        return state;
     }
 }
 

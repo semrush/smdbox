@@ -6,7 +6,7 @@ import { get as getProject } from './selectors'
 
 
 export default connect(state => ({
-    ...getProject
+    ...getProject(state)
 }), {
     create,
     fetchSmd

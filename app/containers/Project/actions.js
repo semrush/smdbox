@@ -5,31 +5,31 @@ export function fetchSmd(url, isRefresh = false) {
         type: ACTION_TYPES.FETCH,
         url,
         isRefresh
-    }
+    };
 }
 
 export function create(params) {
     return {
         type: ACTION_TYPES.CREATE,
         params
-    }
+    };
 }
 
 export function clearProject() {
     return {
         type: ACTION_TYPES.CLEAR
-    }
+    };
 }
 
 
 export function openSettings() {
     return {
         type: ACTION_TYPES.OPEN_SETTINGS
-    }
+    };
 }
 
 export function closeSettings() {
     return {
         type: ACTION_TYPES.CLOSE_SETTINGS
-    }
+    };
 }

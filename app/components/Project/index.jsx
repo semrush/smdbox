@@ -1,5 +1,6 @@
 import React from 'react'
 import bem from 'bem-cl';
+import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import debounce from 'lodash/debounce';
@@ -17,6 +18,22 @@ const modes = {
 
 export default class extends React.Component {
     
+    static propTypes = {
+        endpoint: PropTypes.string.isRequired,
+        fetchSmd: PropTypes.func.isRequired,
+        headers: PropTypes.object.isRequired,
+        smdScheme: PropTypes.object,
+        onSubmit: PropTypes.func,
+        fetchingSchema: PropTypes.bool.isRequired,
+        fetchingSmdError: PropTypes.object,
+    };
+    
+    static defaultProps = {
+        onSubmit: () => {},
+        fetchingSmdError: null,
+        smdScheme: null,
+    };
+    
     constructor(props) {
         super(props);
     
@@ -28,9 +45,7 @@ export default class extends React.Component {
         this.fetchSmd = debounce(this.fetchSmd.bind(this), 800);
     }
     
-    static defaultProps = {
-        onSubmit: () => {}
-    };
+    
     
     componentWillReceiveProps({ endpoint }) {
         if (endpoint !== this.props.endpoint) {

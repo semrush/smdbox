@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { put, select, takeEvery } from 'redux-saga/effects';
 import uuid from 'uuid';
 import * as METHOD_ACTION_TYPES from 'containers/SelectedMethod/actionTypes';
 import { getSelectedMethodFullState } from 'containers/SelectedMethod/selectors';
@@ -6,7 +6,7 @@ import { getSelectedMethod } from 'containers/Sidebar/selectors';
 
 import { save } from './actions';
 
-function* handleRunMethod(action) {
+function* handleRunMethod() {
     const state = yield select();
     try {
         const selectedMethod = getSelectedMethod(state);
@@ -17,10 +17,9 @@ function* handleRunMethod(action) {
             response: selectedMethodState.response,
             formData: selectedMethodState.formData,
         }));
-    } catch (err){
-        console.log("Failed to save history", err)
+    } catch (err) {
+        console.log('Failed to save history', err);
     }
-    
 }
 export default function* HistorySaga() {
     yield [

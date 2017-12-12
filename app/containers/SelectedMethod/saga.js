@@ -1,12 +1,11 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { getHeaders, getEndPoint } from 'containers/Project/selectors';
+import { getSelectedMethod } from 'containers/Sidebar/selectors';
+import { createRequest } from 'helpers/rpc';
 
 import * as ACTION_TYPES from './actionTypes';
 import * as Actions from './actions';
-
-import { getSchema, getHeaders, getEndPoint } from 'containers/Project/selectors';
-import { getSelectedMethod } from 'containers/Sidebar/selectors';
-import { createRequest } from 'helpers/rpc';
 
 function* onRunMethod(action) {
     try {
@@ -26,17 +25,13 @@ function* onRunMethod(action) {
         }
         
         yield put(Actions.runMethodSuccess(response.data.result));
-    } catch(e) {
-        yield put(Actions.runMethodFailure({message: e.toString()}));
+    } catch (e) {
+        yield put(Actions.runMethodFailure({ message: e.toString() }));
     }
 }
 
-function* onRunMethodSuccess(action) {
-
-}
 export default function* SelectedMethodSaga() {
     yield [
-        takeEvery(ACTION_TYPES.RUN_METHOD, onRunMethod),
-        takeEvery(ACTION_TYPES.RUN_METHOD_SUCCESS, onRunMethodSuccess),
+        takeEvery(ACTION_TYPES.RUN_METHOD, onRunMethod)
     ];
 }

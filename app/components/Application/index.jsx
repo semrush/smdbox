@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import bemCl from 'bem-cl';
 
 import Project from 'containers/Project';
@@ -12,6 +13,11 @@ import './Application.scss';
 const b = bemCl('sb-application');
 
 class Application extends React.PureComponent {
+    static propTypes = {
+        isProjectCreated: PropTypes.bool.isRequired,
+        settingsOpen: PropTypes.bool.isRequired,
+    };
+    
     
     state = {
         showHistory: false,
@@ -38,18 +44,9 @@ class Application extends React.PureComponent {
                     </div>
                     { this.props.isProjectCreated &&
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="" onClick={ (e) => {
-                                e.nativeEvent.preventDefault();
-                                this.showHistory();
-                            } }>History</a></li>
-                            <li><a href="" onClick={ (e) => {
-                                e.nativeEvent.preventDefault();
-                                this.props.openSettings();
-                            } }>Settings</a></li>
-                            <li><a href="" onClick={ (e) => {
-                                e.nativeEvent.preventDefault();
-                                this.props.clearProject();
-                            } }>Exit</a></li>
+                            <li><a onClick={this.showHistory}>History</a></li>
+                            <li><a onClick={this.props.openSettings}>Settings</a></li>
+                            <li><a onClick={this.props.clearProject}>Exit</a></li>
                         </ul>
                     }
                 </div>
@@ -64,7 +61,7 @@ class Application extends React.PureComponent {
                 this.props.isProjectCreated &&
                 <Grid fluid>
                     <Row>
-                        <Col md={3} style={{ height: 'calc(100vh - 51px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>
+                        <Col md={3} className={b('content-column')} style={{ }}>
                             <Sidebar />
                         </Col>
                         <Col md={9} style={{ height: 'calc(100vh - 51px)', overflow: 'auto', paddingTop: '15px', paddingBottom: '15px' }}>

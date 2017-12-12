@@ -1,6 +1,6 @@
 import React from 'react';
 import bemCl from 'bem-cl';
-
+import PropTypes from 'prop-types';
 import MethodDescription from 'components/MethodDescription';
 import MethodInvoker from 'components/MethodInvoker';
 import { Grid, Col, Row, Alert, Button } from 'react-bootstrap';
@@ -10,6 +10,27 @@ import './MethodViewer.scss';
 const b = bemCl('sb-method-viewer');
 
 class MethodViewer extends React.PureComponent {
+    static propTypes = {
+        methodSchema: PropTypes.object.isRequired,
+        schema: PropTypes.object,
+        formData: PropTypes.object,
+        changeFormData: PropTypes.func.isRequired,
+        runMethod: PropTypes.func.isRequired,
+        hideError: PropTypes.func.isRequired,
+        loading: PropTypes.bool,
+        error: PropTypes.object,
+        response: PropTypes.object,
+        state: PropTypes.object,
+    };
+    
+    static defaultProps = {
+        error: null,
+        schema: null,
+        loading: false,
+        response: undefined,
+        formData: {}
+    };
+    
     state = { showInfo: true, showTry: true};
     
     showInfo = (show = true) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import bemCl from 'bem-cl';
+import PropTypes from 'prop-types';
 import { Grid, Col, Row, Tabs, Tab } from 'react-bootstrap';
 
 import JsonViewer from 'components/JsonViewer';
@@ -9,7 +10,11 @@ import './History.scss';
 const b = bemCl('sb-history');
 
 class History extends React.PureComponent {
-    
+    static propTypes = {
+        selectedItem: PropTypes.object,
+        selectItem: PropTypes.func,
+        item: PropTypes.arrayOf(PropTypes.object)
+    }
     renderListItem = (item) => {
         return (
             <li

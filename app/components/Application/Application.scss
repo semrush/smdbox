@@ -3,10 +3,16 @@
     .navbar {
         margin-bottom: 0;
     }
+
+    &__content-column{
+        height: calc(100vh - 51px);
+        overflow: auto;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
 }
 
 .form-inline {
-
     .form-group:not(:last-child) {
         margin-right: 10px;
     }

@@ -1,7 +1,7 @@
+import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import * as ACTION_TYPES from './actionTypes';
 import * as ProjectActions from './actions';
-import axios from 'axios';
 
 function* onFetch({ url, isRefresh }) {
     try {
@@ -10,10 +10,10 @@ function* onFetch({ url, isRefresh }) {
         });
         yield put({ type: ACTION_TYPES.FETCH_SUCCESS, smdScheme: smdScheme.data, smdUrl: url, isRefresh });
         // if refresh - close settings
-        if (isRefresh){
+        if (isRefresh) {
             yield put(ProjectActions.closeSettings());
         }
-    } catch(e) {
+    } catch (e) {
         yield put({ type: ACTION_TYPES.FETCH_ERROR });
     }
 }

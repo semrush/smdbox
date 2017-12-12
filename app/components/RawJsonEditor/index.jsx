@@ -9,18 +9,21 @@ import './RawJsonEditor.scss';
 const b = bemCl('sb-raw-json-editor');
 
 class RawJsonEditor extends React.PureComponent {
-   
-    state = { value: '', valid: true};
-    
     static propTypes = {
         schema: PropTypes.object,
-        onSubmit: PropTypes.func
+        formData: PropTypes.object,
+        onSubmit: PropTypes.func,
+        onChange: PropTypes.func.isRequired,
+        method: PropTypes.string.isRequired
     };
     
     static defaultProps = {
         schema: null,
-        onSubmit: () => {}
+        onSubmit: () => {},
+        formData: {}
     };
+    
+    state = { value: '', valid: true};
     
     /* REACT LIFECYCLE */
     componentWillMount() {

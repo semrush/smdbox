@@ -49,7 +49,11 @@ class JsonViewer extends React.PureComponent {
                     unmountOnExit={true}
                 >
                     <Tab eventKey={1} title="Formatted">
-                        <JSONTree data={this.props.json} theme={theme} />
+                        {
+                            this.props.json && (
+                                <JSONTree data={this.props.json} theme={theme} />
+                            )
+                        }
                     </Tab>
                     <Tab eventKey={2} title="Raw">
                         <div className={b('raw')}>

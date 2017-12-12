@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export function selectService(service) {
-    return { type: ACTION_TYPES.SELECT_SERVICE, service }
+    return { type: ACTION_TYPES.SELECT_SERVICE, service };
 }
 
 export default function sidebarReducer(state = initialState, action) {

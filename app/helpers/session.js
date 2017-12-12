@@ -14,44 +14,44 @@ const logerr = (err) => {
 const connectDB = (f) => {
     const request = indexedDB.open(dbName, 1);
     request.onerror = logerr;
-    request.onsuccess = function(){
+    request.onsuccess = function () {
         f(request.result);
-    }
-    request.onupgradeneeded = function(e){
+    };
+    request.onupgradeneeded = function (e) {
         e.currentTarget.result.createObjectStore(storeName);
         connectDB(f);
-    }
-}
+    };
+};
 
 export const get = (f) => {
-    connectDB(function(db){
-        const request = db.transaction([storeName], "readonly").objectStore(storeName).get(storageKey);
+    connectDB((db) => {
+        const request = db.transaction([storeName], 'readonly').objectStore(storeName).get(storageKey);
         request.onerror = logerr;
-        request.onsuccess = function(){
-            if (typeof (request.result) === 'object'){
+        request.onsuccess = function () {
+            if (typeof (request.result) === 'object') {
                 f(request.result);
             } else {
                 f(false);
             }
-        }
+        };
     });
-}
+};
 
 export const write = (data) => {
-    connectDB(function(db){
-        const request = db.transaction([storeName], "readwrite").objectStore(storeName).put(data, storageKey);
+    connectDB((db) => {
+        const request = db.transaction([storeName], 'readwrite').objectStore(storeName).put(data, storageKey);
         request.onerror = logerr;
-        request.onsuccess = function(){
+        request.onsuccess = function () {
             return request.result;
-        }
+        };
     });
 };
 
 
 export const syncStore = (store) => {
-    store.subscribe( () => {
+    store.subscribe(() => {
         // remove formData from store
-        let stateData = cloneDeep(store.getState());
+        const stateData = cloneDeep(store.getState());
         
         // hotfix - react-json-schema cannot restore object values. Do not save formData
         if (stateData.selectedMethod &&
@@ -60,5 +60,5 @@ export const syncStore = (store) => {
             stateData.selectedMethod.formData = {};
         }
         write(stateData);
-    })
-}
+    });
+};

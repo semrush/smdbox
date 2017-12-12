@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Table, Tabs, Tab, Alert } from 'react-bootstrap';
 import bemCl from 'bem-cl';
 import map from 'lodash/map';
@@ -10,6 +11,9 @@ import './MethodDescription.scss';
 const b = bemCl('sb-method-description');
 
 class MethodDescription extends React.PureComponent{
+    static propTypes = {
+        schema: PropTypes.object
+    };
     
     resolveType(type, parent) {
         if (type === 'array'){

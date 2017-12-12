@@ -6,7 +6,7 @@ export const runMethod = (params, raw = false) => ({
     raw
 });
 
-export const runMethodRequest = (params) => ({
+export const runMethodRequest = params => ({
     type: ACTION_TYPES.RUN_METHOD_REQUEST,
     params
 });
@@ -23,10 +23,10 @@ export const runMethodFailure = (error = '') => ({
 
 export const hideError = () => ({
     type: ACTION_TYPES.HIDE_ERROR
-})
+});
 
 
-export const changeFormData = (formData) => ({
+export const changeFormData = formData => ({
     type: ACTION_TYPES.CHANGE_FORM_DATA,
     formData
 });

@@ -1,7 +1,11 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 class MainLayout extends React.PureComponent{
+    static propTypes = {
+        content: PropTypes.element
+    };
+    
     render() {
         return (
             <div>

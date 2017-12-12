@@ -5,3 +5,5 @@ export const getHeaders = state => state.project.headers;
 
 export const getEndPoint = state => state.project.endpoint;
 
+export const isProjectCreated = state => state.project.created;
+export const areSettingsOpened = state => state.project.settingsOpen;

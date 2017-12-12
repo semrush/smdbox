@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import bemCl from 'bem-cl';
 import isUndefined from 'lodash/isUndefined';
 
@@ -13,6 +14,24 @@ import './MethodInvoker.scss';
 const b = bemCl('sb-method-invoker');
 
 class MethodInvoker extends React.PureComponent {
+    static propTypes = {
+        schema: PropTypes.object.isRequired,
+        formData: PropTypes.object,
+        changeFormData: PropTypes.func.isRequired,
+        runMethod: PropTypes.func.isRequired,
+        hideError: PropTypes.func.isRequired,
+        loading: PropTypes.bool,
+        error: PropTypes.object,
+        response: PropTypes.object,
+    };
+    
+    static defaultProps = {
+        error: null,
+        loading: false,
+        response: undefined,
+        formData: {}
+    };
+    
     handleSubmit = (params) => {
         this.props.runMethod(params);
     };

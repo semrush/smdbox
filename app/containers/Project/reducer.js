@@ -1,5 +1,5 @@
-import * as ACTION_TYPES from './actionTypes';
 import URL from 'url-parse';
+import * as ACTION_TYPES from './actionTypes';
 
 const initialState = {
     smdScheme: null,
@@ -8,9 +8,9 @@ const initialState = {
     smdUrl: null,
     created: false,
     fetchingSchema: false,
-    fetchingSmdError: false
+    fetchingSmdError: false,
+    settingsOpen: false
 };
-
 
 
 function createProjectReducer(state = initialState, action) {
