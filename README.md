@@ -1,6 +1,6 @@
 # SMD BOX
 
-Smd box is tool for displaying SMD schema of RPC services and testing those services live.
+SMD Box is UI for human-readable displaying of JSON-RPC SMD schemas from remote url, allowing you to call RPC methods live, view and log results.
 
 ## Getting started
 
