@@ -11,7 +11,8 @@
     "build:dll": "NODE_ENV=development BUILDING_DLL=true webpack --config webpack/webpack.dll.js --color -p --progress",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p",
-    "dist": "NODE_ENV=production IS_DIST=true webpack --config webpack/webpack.prod.js --progress -p"
+    "dist": "NODE_ENV=production IS_DIST=true webpack --config webpack/webpack.prod.js --progress -p",
+    "clean": "node webpack/webpack.clean.js"
   },
   "dllPlugin": {
     "path": "node_modules/smdbox-frontend-dlls",
@@ -80,7 +81,7 @@
     "style-loader": "0.13.1",
     "svg-sprite-loader": "^0.3.0",
     "url-loader": "0.5.7",
-    "webpack": "2.6.0",
+    "webpack": "^3.10.0",
     "webpack-dev-middleware": "1.9.0",
     "webpack-dev-server": "^2.4.1",
     "webpack-hot-middleware": "2.15.0"

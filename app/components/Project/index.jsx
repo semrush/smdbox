@@ -85,6 +85,37 @@ class Project extends React.Component {
         ] });
     }
     
+    handleChangeUrl = (e) => {
+        e.persist();
+        this.fetchSmd(e.nativeEvent.target.value)
+    }
+    
+    handleChangeHeaderName = (index, value) => {
+        this.setState({
+            headers: map(this.state.headers, (header, headerIndex) => {
+                if (headerIndex === index) {
+                    return {
+                        ...header,
+                        key: value
+                    };
+                } else { return header }
+            })
+        })
+    };
+    
+    handleChangeHeaderValue = (index, value) => {
+        this.setState({
+            headers: map(this.state.headers, (header, headerIndex) => {
+                if (headerIndex === index) {
+                    return {
+                        ...header,
+                        value
+                    };
+                } else { return header }
+            })
+        })
+    };
+    
     render() {
         const { mode } = this.props;
         return (
@@ -96,7 +127,7 @@ class Project extends React.Component {
                             <FormControl
                                 placeholder="Enter SMD scheme url"
                                 disabled={ this.props.fetchingSchema }
-                                onChange={ (e) => { e.persist(); this.fetchSmd(e.nativeEvent.target.value) } }
+                                onChange={ this.handleChangeUrl }
                             />
                         </FormGroup>
                     </div>
@@ -107,24 +138,12 @@ class Project extends React.Component {
                         <Form inline>
                             <FormGroup>
                                 <FormControl placeholder="Key" value={ header.key } onChange={ (e) => {
-                                    this.setState({
-                                        headers: map(this.state.headers, (header, headerIndex) => {
-                                            if (headerIndex === index) {
-                                                return { ...header, key: e.nativeEvent.target.value }
-                                            } else { return header }
-                                        })
-                                    })
+                                    this.handleChangeHeaderName(index, e.nativeEvent.target.value);
                                 } } />
                             </FormGroup>
                             <FormGroup>
                                 <FormControl placeholder="Value" value={ header.value } onChange={ (e) => {
-                                    this.setState({
-                                        headers: map(this.state.headers, (header, headerIndex) => {
-                                            if (headerIndex === index) {
-                                                return { ...header, value: e.nativeEvent.target.value }
-                                            } else { return header }
-                                        })
-                                    })
+                                    this.handleChangeHeaderValue(index, e.nativeEvent.target.value);
                                 } } />
                             </FormGroup>
                             <FormGroup>
