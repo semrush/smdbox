@@ -4,40 +4,12 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const pkg  = require(path.join(process.cwd(), 'package.json'));
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-
+const AutoDllPlugin = require('autodll-webpack-plugin');
 const APP_PORT = 4500;
 const APP_FOLDER = 'app';
 const BUILD_FOLDER = 'build';
 
-const getDllPlugin = () => {
-    const dllPath = path.resolve(process.cwd(), pkg.dllPlugin.path);
-
-    const manifestPath = path.resolve(dllPath, `${pkg.dllPlugin.packageName}.json`);
-
-    if (!fs.existsSync(manifestPath)) {
-        console.error('The DLL manifest is missing. Please run `npm run build:dll`');
-        process.exit(0);
-    }
-    
-    return [
-        new webpack.DllReferencePlugin({
-            context: process.cwd(),
-            manifest: require(manifestPath),
-        })
-    ];
-}
-
-const getAddAssetsPlugin = () => {
-    if(!pkg.dllPlugin) return [];
-
-    return [
-        new AddAssetHtmlPlugin({
-            filepath: require.resolve(path.join(process.cwd(), pkg.dllPlugin.path,`${pkg.dllPlugin.packageName}.dll.js`)),
-            includeSourcemap: false
-        })
-    ]
-}
+const vendor = Object.keys(pkg.dependencies);
 
 const webpackConfig = {
     entry: {
@@ -95,7 +67,7 @@ const webpackConfig = {
         ]
     },
     plugins: [
-        ...getDllPlugin(),
+        // ...getDllPlugin(),
         new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale/, /en|ru/), // eslint-disable-line no-useless-escape, max-len
         new HtmlWebpackPlugin({
@@ -103,6 +75,11 @@ const webpackConfig = {
             template: `${APP_FOLDER}/assets/html/index.dev.html`,
             minify: false,
             inject: 'body',
+        }),
+        new AutoDllPlugin({
+            inject: true,
+            filename: '[name].js',
+            entry: { vendor },
         }),
         new CircularDependencyPlugin({
             exclude: /a\.js|node_modules/, // exclude node_modules
@@ -113,7 +90,7 @@ const webpackConfig = {
             __PROD__: JSON.stringify(false),
         }),
         new webpack.NamedModulesPlugin(),
-        ...getAddAssetsPlugin()
+        // ...getAddAssetsPlugin()
     ],
     resolve: {
         modules: [APP_FOLDER, 'node_modules'],
@@ -135,9 +112,10 @@ const webpackConfig = {
         stats: {
             assets: false,
             cached: false,
-            children: true,
+            children: false,
             chunks: false,
             chunkModules: false,
+            modules: false,
             colors: true,
             errors: true,
             version: false,

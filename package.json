@@ -7,16 +7,10 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./app --ext .js --ext .jsx",
-    "postinstall": "yarn build:dll",
-    "build:dll": "NODE_ENV=development BUILDING_DLL=true webpack --config webpack/webpack.dll.js --color -p --progress",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p",
     "dist": "NODE_ENV=production IS_DIST=true webpack --config webpack/webpack.prod.js --progress -p",
-    "clean": "node webpack/webpack.clean.js"
-  },
-  "dllPlugin": {
-    "path": "node_modules/smdbox-frontend-dlls",
-    "packageName": "SMDBoxDlls"
+    "clean": "node webpack/clean.js"
   },
   "engines": {
     "node": ">=0.10.0",
@@ -25,15 +19,16 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bem-cl": "^1.0.2",
+    "copy-to-clipboard": "^3.0.6",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
-    "react-hot-loader": "^3.0.0-beta.6",
+    "react-hot-loader": "^3.1.3",
     "react-json-tree": "^0.10.9",
-    "react-jsonschema-form": "^0.50.1",
+    "react-jsonschema-form": "^1.0.0",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -45,7 +40,7 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "add-asset-html-webpack-plugin": "^1.0.2",
+    "autodll-webpack-plugin": "^0.3.7",
     "babel-cli": "6.18.0",
     "babel-core": "6.21.0",
     "babel-eslint": "^8.0.2",
@@ -56,13 +51,12 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "6.20.0",
     "babel-preset-latest": "6.16.0",
-    "babel-preset-react": "6.16.0",
-    "babel-preset-react-hmre": "1.1.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "6.16.0",
     "babel-runtime": "^6.23.0",
     "circular-dependency-plugin": "^2.0.0",
     "clean-webpack-plugin": "^0.1.15",
-    "copy-to-clipboard": "^3.0.6",
     "css-loader": "^0.26.1",
     "csscomb": "^4.0.0",
     "eslint": "^3.15.0",
@@ -82,8 +76,8 @@
     "svg-sprite-loader": "^0.3.0",
     "url-loader": "0.5.7",
     "webpack": "^3.10.0",
-    "webpack-dev-middleware": "1.9.0",
-    "webpack-dev-server": "^2.4.1",
-    "webpack-hot-middleware": "2.15.0"
+    "webpack-dev-middleware": "^1.12.2",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-hot-middleware": "^2.21.0"
   }
 }
