@@ -8,18 +8,14 @@ import { save } from './actions';
 
 function* handleRunMethod() {
     const state = yield select();
-    try {
-        const selectedMethod = getSelectedMethod(state);
-        const selectedMethodState = getSelectedMethodFullState(state);
-        yield put(save({
-            id: uuid.v4(),
-            method: selectedMethod,
-            response: selectedMethodState.response,
-            formData: selectedMethodState.formData,
-        }));
-    } catch (err) {
-        console.log('Failed to save history', err);
-    }
+    const selectedMethod = getSelectedMethod(state);
+    const selectedMethodState = getSelectedMethodFullState(state);
+    yield put(save({
+        id: uuid.v4(),
+        method: selectedMethod,
+        response: selectedMethodState.response,
+        formData: selectedMethodState.formData,
+    }));
 }
 export default function* HistorySaga() {
     yield [

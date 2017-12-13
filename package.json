@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./app --ext .js --ext .jsx",
-    "postinstall": "npm run build:dll",
+    "postinstall": "yarn build:dll",
     "build:dll": "NODE_ENV=development BUILDING_DLL=true webpack --config webpack/webpack.dll.js --color -p --progress",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p",
@@ -18,7 +18,8 @@
     "packageName": "SMDBoxDlls"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "yarn": "^0.13.0"
   },
   "dependencies": {
     "axios": "^0.16.2",

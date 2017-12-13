@@ -11,7 +11,7 @@ import Method from './Method';
 import './Sidebar.scss';
 
 
-export default class extends React.Component {
+class Sidebar extends React.Component {
     static propTypes = {
         namespacedMethods: PropTypes.object,
         otherMethods: PropTypes.object,
@@ -84,3 +84,5 @@ export default class extends React.Component {
         );
     }
 }
+
+export default Sidebar;

@@ -16,7 +16,7 @@ const modes = {
     SETTINGS: 'settings'
 };
 
-export default class extends React.Component {
+class Project extends React.Component {
     
     static propTypes = {
         endpoint: PropTypes.string,
@@ -173,3 +173,5 @@ export default class extends React.Component {
         )
     }
 }
+
+export default Project;
