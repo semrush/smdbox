@@ -50,15 +50,18 @@ export const write = (data) => {
 
 export const syncStore = (store) => {
     store.subscribe(() => {
-        // remove formData from store
-        const stateData = cloneDeep(store.getState());
-        
-        // hotfix - react-json-schema cannot restore object values. Do not save formData
-        if (stateData.selectedMethod &&
-            stateData.selectedMethod.formData &&
-            Object.keys(stateData.selectedMethod.formData).length) {
-            stateData.selectedMethod.formData = {};
-        }
-        write(stateData);
+        // do write in animation frame to avoid blocking application
+        requestAnimationFrame(() => {
+            // remove formData from store
+            const stateData = cloneDeep(store.getState());
+    
+            // hotfix - react-json-schema cannot restore object values. Do not save formData
+            if (stateData.selectedMethod &&
+                stateData.selectedMethod.formData &&
+                Object.keys(stateData.selectedMethod.formData).length) {
+                stateData.selectedMethod.formData = {};
+            }
+            write(stateData);
+        })
     });
 };

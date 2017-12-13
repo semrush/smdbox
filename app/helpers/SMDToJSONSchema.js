@@ -60,23 +60,13 @@ const smdToSchema = (smd) => {
         // TODO remove manual cutting of wrong definitions
         Object.keys(P.definitions).forEach((key, i) => {
             const def = P.definitions[i];
-    
-            Object.keys(def.properties).forEach((prop, j) => {
+
+            def && def.properties && Object.keys(def.properties).forEach((prop, j) => {
                 if (def.properties[j].$ref === '#/definitions/') {
                     def.properties[j] = { type: 'string' };
                 }
             });
         });
-        
-        // for (const i of Object.keys(P.definitions)) {
-        //     const def = P.definitions[i];
-        //
-        //     for (const j of Object.keys(def.properties)) {
-        //         if (def.properties[j].$ref === '#/definitions/') {
-        //             def.properties[j] = { type: 'string' };
-        //         }
-        //     }
-        // }
     });
     P.type = 'object';
     P.description = smd.description;

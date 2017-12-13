@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import debounce from 'lodash/debounce';
-import { FormControl, Form, FormGroup, Button, ControlLabel, Glyphicon } from 'react-bootstrap';
+import { FormControl, Form, FormGroup, Button, Glyphicon } from 'react-bootstrap';
 import './Project.scss';
 
 const b = {
@@ -19,19 +19,20 @@ const modes = {
 export default class extends React.Component {
     
     static propTypes = {
-        endpoint: PropTypes.string.isRequired,
+        endpoint: PropTypes.string,
         fetchSmd: PropTypes.func.isRequired,
         headers: PropTypes.object.isRequired,
         smdScheme: PropTypes.object,
         onSubmit: PropTypes.func,
         fetchingSchema: PropTypes.bool.isRequired,
-        fetchingSmdError: PropTypes.object,
+        fetchingSmdError: PropTypes.bool,
     };
     
     static defaultProps = {
         onSubmit: () => {},
-        fetchingSmdError: null,
+        fetchingSmdError: false,
         smdScheme: null,
+        endpoint: ''
     };
     
     constructor(props) {

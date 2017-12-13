@@ -39,7 +39,6 @@ const getAddAssetsPlugin = () => {
     ]
 }
 
-console.log(path.join(process.cwd(), APP_FOLDER, 'index.jsx'))
 const webpackConfig = {
     entry: {
         app: [
