@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import bem from 'bem-cl';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
@@ -26,13 +26,18 @@ class Project extends React.Component {
         onSubmit: PropTypes.func,
         fetchingSchema: PropTypes.bool.isRequired,
         fetchingSmdError: PropTypes.bool,
+        create: PropTypes.func.isRequired,
+        smdUrl: PropTypes.string,
+        mode: PropTypes.oneOf([modes.INIT, modes.SETTINGS])
     };
     
     static defaultProps = {
         onSubmit: () => {},
         fetchingSmdError: false,
         smdScheme: null,
-        endpoint: ''
+        endpoint: '',
+        smdUrl: '',
+        mode: modes.INIT
     };
     
     constructor(props) {
@@ -45,7 +50,6 @@ class Project extends React.Component {
     
         this.fetchSmd = debounce(this.fetchSmd.bind(this), 800);
     }
-    
     
     
     componentWillReceiveProps({ endpoint }) {
@@ -63,8 +67,8 @@ class Project extends React.Component {
         this.props.create({
             endpoint: this.state.endpoint,
             headers: reduce(this.state.headers, (res, header) => {
-                if (header.key && header.value) { res[header.key] = header.value }
-                return res
+                if (header.key && header.value) { res[header.key] = header.value; }
+                return res;
             }, {})
         });
         this.props.onSubmit();
@@ -75,7 +79,7 @@ class Project extends React.Component {
     };
     
     addHeader() {
-        this.setState({ headers: [ ...this.state.headers, { key: '', value: '' } ] })
+        this.setState({ headers: [...this.state.headers, { key: '', value: '' }] });
     }
     
     removeHeader(index) {
@@ -85,9 +89,17 @@ class Project extends React.Component {
         ] });
     }
     
+    getFormValidationState = () => {
+        if (this.props.fetchingSmdError) return 'error';
+    
+        if (this.props.smdScheme !== null) return 'success';
+        
+        return null;
+    }
+    
     handleChangeUrl = (e) => {
         e.persist();
-        this.fetchSmd(e.nativeEvent.target.value)
+        this.fetchSmd(e.nativeEvent.target.value);
     }
     
     handleChangeHeaderName = (index, value) => {
@@ -98,9 +110,9 @@ class Project extends React.Component {
                         ...header,
                         key: value
                     };
-                } else { return header }
+                } return header;
             })
-        })
+        });
     };
     
     handleChangeHeaderValue = (index, value) => {
@@ -111,43 +123,47 @@ class Project extends React.Component {
                         ...header,
                         value
                     };
-                } else { return header }
+                } return header;
             })
-        })
+        });
     };
     
     render() {
         const { mode } = this.props;
         return (
-            <div className={ b.createProject() }>
+            <div className={b.createProject()}>
                 { mode !== modes.SETTINGS &&
                     <div>
                         <h4>SMD scheme *</h4>
-                        <FormGroup validationState={ this.props.fetchingSmdError ? 'error' : this.props.smdScheme !== null ? 'success' : null }>
+                        <FormGroup validationState={this.getFormValidationState()}>
                             <FormControl
                                 placeholder="Enter SMD scheme url"
-                                disabled={ this.props.fetchingSchema }
-                                onChange={ this.handleChangeUrl }
+                                disabled={this.props.fetchingSchema}
+                                onChange={this.handleChangeUrl}
                             />
                         </FormGroup>
                     </div>
                 }
                 <h4>Custom headers</h4>
                 { map(this.state.headers, (header, index) => (
-                    <FormGroup key={ `header-${index}` }>
+                    <FormGroup key={`header-${index}`}>
                         <Form inline>
                             <FormGroup>
-                                <FormControl placeholder="Key" value={ header.key } onChange={ (e) => {
-                                    this.handleChangeHeaderName(index, e.nativeEvent.target.value);
-                                } } />
+                                <FormControl
+                                    placeholder="Key" value={header.key} onChange={(e) => {
+                                        this.handleChangeHeaderName(index, e.nativeEvent.target.value);
+                                    }}
+                                />
                             </FormGroup>
                             <FormGroup>
-                                <FormControl placeholder="Value" value={ header.value } onChange={ (e) => {
-                                    this.handleChangeHeaderValue(index, e.nativeEvent.target.value);
-                                } } />
+                                <FormControl
+                                    placeholder="Value" value={header.value} onChange={(e) => {
+                                        this.handleChangeHeaderValue(index, e.nativeEvent.target.value);
+                                    }}
+                                />
                             </FormGroup>
                             <FormGroup>
-                                <Button bsStyle="warning" onClick={ () => this.removeHeader(index) }>
+                                <Button bsStyle="warning" onClick={() => this.removeHeader(index)}>
                                     <Glyphicon glyph="remove" />
                                 </Button>
                             </FormGroup>
@@ -155,41 +171,41 @@ class Project extends React.Component {
                     </FormGroup>
                 )) }
                 <FormGroup>
-                    <Button onClick={ () => { this.addHeader() } }>Add header</Button>
+                    <Button onClick={() => { this.addHeader(); }}>Add header</Button>
                 </FormGroup>
                 <h4>API endpoint for test</h4>
                 <FormGroup>
                     <FormControl
                         placeholder="Enter endpoint url"
-                        onChange={ (e) => this.setState({ endpoint: e.nativeEvent.target.value }) }
-                        value={ this.state.endpoint }
+                        onChange={e => this.setState({ endpoint: e.nativeEvent.target.value })}
+                        value={this.state.endpoint}
                     />
                 </FormGroup>
                 <FormGroup>
                     <Button
-                        bsStyle={ mode === modes.SETTINGS ? "primary" : "success" }
+                        bsStyle={mode === modes.SETTINGS ? 'primary' : 'success'}
                         type="submit"
-                        onClick={ this.onSubmit }
-                        disabled={ this.props.smdScheme === null }
+                        onClick={this.onSubmit}
+                        disabled={this.props.smdScheme === null}
                     >
-                        { mode === modes.SETTINGS ? "Update" : "Create" }
+                        { mode === modes.SETTINGS ? 'Update' : 'Create' }
                     </Button>
                     {
                         mode === modes.SETTINGS && (
                             <Button
-                                bsStyle={ "default" }
+                                bsStyle={'default'}
                                 type="button"
-                                onClick={ this.onRefresh }
-                                disabled={ this.props.smdScheme === null || this.props.fetchingSchema}
+                                onClick={this.onRefresh}
+                                disabled={this.props.smdScheme === null || this.props.fetchingSchema}
                             >
-                                { this.props.fetchingSchema ? "...Refreshing..." : "Refresh SMD schema" }
+                                { this.props.fetchingSchema ? '...Refreshing...' : 'Refresh SMD schema' }
                             </Button>
                         )
                     }
                     
                 </FormGroup>
             </div>
-        )
+        );
     }
 }
 

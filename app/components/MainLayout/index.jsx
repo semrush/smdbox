@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class MainLayout extends React.PureComponent{
+class MainLayout extends React.PureComponent {
     static propTypes = {
         content: PropTypes.element
+    };
+    
+    static defaultProps = {
+        content: null
     };
     
     render() {
@@ -16,13 +20,13 @@ class MainLayout extends React.PureComponent{
                         </div>
                         
                         <ul className="nav navbar-nav navbar-right">
-                            <li>{  }</li>
+                            <li>{ }</li>
                         </ul>
                     </div>
                 </nav>
                 {this.props.content}
             </div>
-        )
+        );
     }
 }
 

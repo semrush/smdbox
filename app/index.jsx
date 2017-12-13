@@ -1,19 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-
 import Application from 'containers/Application';
 import { get as getStore } from 'helpers/session';
 import configureStore from './configureStore';
 
-import 'styles/main.scss';
+import './styles/main.scss';
 
 const rootNode = document.querySelector('#json-rpc-root');
-
-getStore( (storeData) => {
-    const store = configureStore(storeData || {});
-    renderApp(Application, store);
-});
 
 const renderApp = (App, store) =>
     render(
@@ -22,6 +16,11 @@ const renderApp = (App, store) =>
         </Provider>,
         rootNode
     );
+
+getStore((storeData) => {
+    const store = configureStore(storeData || {});
+    renderApp(Application, store);
+});
 
 
 if (module.hot) {

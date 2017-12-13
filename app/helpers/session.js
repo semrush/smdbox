@@ -62,6 +62,6 @@ export const syncStore = (store) => {
                 stateData.selectedMethod.formData = {};
             }
             write(stateData);
-        })
+        });
     });
 };

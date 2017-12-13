@@ -16,6 +16,9 @@ class Application extends React.PureComponent {
     static propTypes = {
         isProjectCreated: PropTypes.bool.isRequired,
         settingsOpen: PropTypes.bool.isRequired,
+        closeSettings: PropTypes.func.isRequired,
+        openSettings: PropTypes.func.isRequired,
+        clearProject: PropTypes.func.isRequired,
     };
     
     
@@ -31,33 +34,33 @@ class Application extends React.PureComponent {
         this.setState({ showHistory: false });
     };
     showHistory = () => {
-        this.setState({ showHistory: true })
+        this.setState({ showHistory: true });
     };
     
     render() {
         return (
-        <div className={ b() }>
-            <nav className="navbar navbar-inverse navbar-static-top">
-                <div className="container-fluid">
-                    <div className="navbar-header">
-                        <a className="navbar-brand" href="#">SMDbox</a>
-                    </div>
-                    { this.props.isProjectCreated &&
+            <div className={b()}>
+                <nav className="navbar navbar-inverse navbar-static-top">
+                    <div className="container-fluid">
+                        <div className="navbar-header">
+                            <a className="navbar-brand" href="#">SMDbox</a>
+                        </div>
+                        { this.props.isProjectCreated &&
                         <ul className="nav navbar-nav navbar-right">
                             <li><a onClick={this.showHistory}>History</a></li>
                             <li><a onClick={this.props.openSettings}>Settings</a></li>
                             <li><a onClick={this.props.clearProject}>Exit</a></li>
                         </ul>
                     }
-                </div>
-            </nav>
-            {
+                    </div>
+                </nav>
+                {
                 !this.props.isProjectCreated &&
                 <Grid style={{ paddingTop: '15px' }}>
                     <Project />
                 </Grid>
             }
-            {
+                {
                 this.props.isProjectCreated &&
                 <Grid fluid>
                     <Row>
@@ -73,7 +76,7 @@ class Application extends React.PureComponent {
                             <Modal.Title>Project settings</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Project mode="settings" onSubmit={ this.hideSettings } />
+                            <Project mode="settings" onSubmit={this.hideSettings} />
                         </Modal.Body>
                     </Modal>
     
@@ -87,7 +90,7 @@ class Application extends React.PureComponent {
                     </Modal>
                 </Grid>
             }
-        </div>
+            </div>
         );
     }
 }

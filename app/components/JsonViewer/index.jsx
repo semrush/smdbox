@@ -24,8 +24,8 @@ class JsonViewer extends React.PureComponent {
     getRawJson() {
         try {
             return JSON.stringify(this.props.json, null, 2);
-        } catch(err){
-            return "";
+        } catch (err) {
+            return '';
         }
     }
     
@@ -45,8 +45,8 @@ class JsonViewer extends React.PureComponent {
                 <Tabs
                     defaultActiveKey={1}
                     id="json-viewer-tabs"
-                    mountOnEnter={true}
-                    unmountOnExit={true}
+                    mountOnEnter
+                    unmountOnExit
                 >
                     <Tab eventKey={1} title="Formatted">
                         {

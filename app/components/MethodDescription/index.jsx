@@ -10,13 +10,17 @@ import './MethodDescription.scss';
 
 const b = bemCl('sb-method-description');
 
-class MethodDescription extends React.PureComponent{
+class MethodDescription extends React.PureComponent {
     static propTypes = {
         schema: PropTypes.object
     };
     
+    static defaultProps = {
+        schema: {}
+    };
+    
     resolveType(type, parent) {
-        if (type === 'array'){
+        if (type === 'array') {
             return `[ ]${parent.items.type || ''}`;
         }
         
@@ -47,16 +51,16 @@ class MethodDescription extends React.PureComponent{
         
         if (parent[param].properties) {
             Object.keys(parent[param].properties).forEach(
-                nestedParam => {
+                (nestedParam) => {
                     rows.push(
                         this.renderParam(
                             nestedParam,
                             parent[param].properties,
                             namespace ? `${namespace}.${param}` : param
                         )
-                    )
+                    );
                 }
-            )
+            );
         }
         
         return rows;
@@ -68,7 +72,7 @@ class MethodDescription extends React.PureComponent{
                 <Alert bsStyle="warning">
                     No input properties specified in documentation
                 </Alert>
-            )
+            );
         }
         
         return (
@@ -77,15 +81,15 @@ class MethodDescription extends React.PureComponent{
                 <ParamsTable schema={this.props.schema} />
                 {
                     this.props.schema.parameters && this.props.schema.parameters.length &&
-                    this.props.schema.parameters.map(param => {
+                    this.props.schema.parameters.map((param) => {
                         return map(param.definitions, (definition, definitionKey) => {
                             return (
                                 <div key={definitionKey}>
                                     <h5>Definition of {definitionKey}</h5>
-                                    <ParamsTable schema={definition}/>
+                                    <ParamsTable schema={definition} />
                                 </div>
-                            )
-                        })
+                            );
+                        });
                     })
                 }
             </div>
@@ -97,25 +101,25 @@ class MethodDescription extends React.PureComponent{
             <div className={b('output-tables')}>
                 <Table striped bordered condensed hover>
                     <thead>
-                    <tr>
-                        <th>Type</th>
-                        {
+                        <tr>
+                            <th>Type</th>
+                            {
                             this.props.schema.returns.description && (
                                 <th>Description</th>
                             )
                         }
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{this.props.schema.returns.type}</td>
-                        {
+                        <tr>
+                            <td>{this.props.schema.returns.type}</td>
+                            {
                             this.props.schema.returns.description && (
                                 <td>{this.props.schema.returns.description}</td>
                             )
                         }
             
-                    </tr>
+                        </tr>
                     </tbody>
                 </Table>
             </div>
@@ -126,13 +130,13 @@ class MethodDescription extends React.PureComponent{
         return (
             <Table striped bordered condensed hover>
                 <thead>
-                <tr>
-                    <th>Error code</th>
-                    <th>Description</th>
-                </tr>
+                    <tr>
+                        <th>Error code</th>
+                        <th>Description</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {
+                    {
                     map(this.props.schema.errors, (errorDescription, errorCode) => {
                         return (
                             <tr key={errorCode}>
@@ -167,13 +171,13 @@ class MethodDescription extends React.PureComponent{
                         return (
                             <div key={definitionKey}>
                                 <h5>Definition of {definitionKey}</h5>
-                                <ParamsTable schema={definition}/>
+                                <ParamsTable schema={definition} />
                             </div>
-                        )
+                        );
                     })
                 }
             </div>
-        )
+        );
     }
     
     render() {
@@ -203,7 +207,7 @@ class MethodDescription extends React.PureComponent{
                 </Tabs>
                 
             </div>
-        )
+        );
     }
 }
 

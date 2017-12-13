@@ -1,7 +1,7 @@
 import React from 'react';
 import bemCl from 'bem-cl';
 import PropTypes from 'prop-types';
-import { Grid, Col, Row, Tabs, Tab } from 'react-bootstrap';
+import { Col, Row, Tabs, Tab } from 'react-bootstrap';
 
 import JsonViewer from 'components/JsonViewer';
 
@@ -12,17 +12,22 @@ const b = bemCl('sb-history');
 class History extends React.PureComponent {
     static propTypes = {
         selectedItem: PropTypes.object,
-        selectItem: PropTypes.func,
-        item: PropTypes.arrayOf(PropTypes.object)
+        selectItem: PropTypes.func.isRequired,
+        items: PropTypes.arrayOf(PropTypes.object)
+    }
+    
+    static defaultProps = {
+        selectedItem: null,
+        items: []
     }
     renderListItem = (item) => {
         return (
             <li
                 key={item.id}
-                onClick={()=> {this.props.selectItem(item)} }
-                className={(this.props.selectedItem && this.props.selectedItem.id === item.id) ? 'active' : '' }
+                onClick={() => { this.props.selectItem(item); }}
+                className={(this.props.selectedItem && this.props.selectedItem.id === item.id) ? 'active' : ''}
             >
-                <a onClick={ (e) => e.nativeEvent.preventDefault() }>{ item.method }</a>
+                <a onClick={e => e.nativeEvent.preventDefault()}>{ item.method }</a>
             </li>
         );
     };
@@ -41,7 +46,7 @@ class History extends React.PureComponent {
                     <JsonViewer title="Request params" json={this.props.selectedItem.formData} />
                 </Tab>
             </Tabs>
-        )
+        );
     };
     
     render() {
@@ -51,7 +56,7 @@ class History extends React.PureComponent {
                     <Col md={3}>
                         <ul className="nav nav-pills nav-stacked">
                             {
-                                this.props.items.map(historyItem => {
+                                this.props.items.map((historyItem) => {
                                     return this.renderListItem(historyItem);
                                 })
                             }
@@ -64,7 +69,7 @@ class History extends React.PureComponent {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 

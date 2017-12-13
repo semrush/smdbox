@@ -13,4 +13,4 @@ export default connect(
         openSettings,
         closeSettings
     }
-)(Application)
+)(Application);

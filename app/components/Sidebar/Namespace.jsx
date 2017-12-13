@@ -21,6 +21,7 @@ Namespace.propTypes = {
 
 Namespace.defaultProps = {
     namespaceName: '',
+    children: null
 };
 
 export default Namespace;

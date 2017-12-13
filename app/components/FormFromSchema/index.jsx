@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import bemCl from 'bem-cl';
-import Form from "react-jsonschema-form";
+import Form from 'react-jsonschema-form';
 import { Button } from 'react-bootstrap';
 
 import './FormFromSchema.scss';
@@ -14,13 +14,15 @@ class FormFromSchema extends React.PureComponent {
     static propTypes = {
         schema: PropTypes.object,
         formData: PropTypes.object,
-        onSubmit: PropTypes.func
+        onSubmit: PropTypes.func,
+        onChange: PropTypes.func,
     };
     
     static defaultProps = {
         schema: null,
         formData: {},
-        onSubmit: () => {}
+        onSubmit: () => {},
+        onChange: () => {},
     };
     
     handleFormChange = (data) => {

@@ -21,7 +21,7 @@ export const getNamespacedMethods = createSelector(getServices, (services) => {
             namespaces[namespace] = { ...namespaces[namespace], [method]: service }; // eslint-disable-line
         }
         return namespaces;
-    }, {})
+    }, {});
 });
 
 export const getOtherMethods = createSelector(getServices, (services) => {
@@ -30,5 +30,5 @@ export const getOtherMethods = createSelector(getServices, (services) => {
             otherMethods[key] = service; // eslint-disable-line
         }
         return otherMethods;
-    }, {})
+    }, {});
 });

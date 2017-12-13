@@ -12,7 +12,6 @@ const b = bemCl('sb-method-viewer');
 class MethodViewer extends React.PureComponent {
     static propTypes = {
         methodSchema: PropTypes.object.isRequired,
-        schema: PropTypes.object,
         formData: PropTypes.object,
         changeFormData: PropTypes.func.isRequired,
         runMethod: PropTypes.func.isRequired,
@@ -21,24 +20,25 @@ class MethodViewer extends React.PureComponent {
         error: PropTypes.object,
         response: PropTypes.object,
         state: PropTypes.object,
+        selectedMethod: PropTypes.string.isRequired
     };
     
     static defaultProps = {
         error: null,
-        schema: null,
         loading: false,
         response: undefined,
-        formData: {}
+        formData: {},
+        state: {}
     };
     
-    state = { showInfo: true, showTry: true};
+    state = { showInfo: true, showTry: true };
     
     showInfo = (show = true) => {
-        this.setState({showInfo: show})
+        this.setState({ showInfo: show });
     };
     
     showTry = (show = true) => {
-        this.setState({showTry: show})
+        this.setState({ showTry: show });
     };
     
     renderContent() {
@@ -47,7 +47,7 @@ class MethodViewer extends React.PureComponent {
                 <Alert bsStyle="info">
                     Select method from list at left
                 </Alert>
-            )
+            );
         }
         
         return (
@@ -62,14 +62,16 @@ class MethodViewer extends React.PureComponent {
                                         <Button
                                             bsStyle="success"
                                             bsSize="xsmall"
-                                            onClick={this.showTry}>
+                                            onClick={this.showTry}
+                                        >
                                             Try it
                                         </Button>
                                     )}
                                     { this.state.showTry && (
                                         <Button
                                             bsSize="xsmall"
-                                            onClick={()=>{this.showInfo(false)}}>
+                                            onClick={() => { this.showInfo(false); }}
+                                        >
                                             Hide
                                         </Button>
                                     )}
@@ -91,14 +93,16 @@ class MethodViewer extends React.PureComponent {
                                         <Button
                                             bsSize="xsmall"
                                             bsStyle="success"
-                                            onClick={this.showInfo}>
+                                            onClick={this.showInfo}
+                                        >
                                             Show description
                                         </Button>
                                     )}
                                     { this.state.showInfo && (
                                         <Button
                                             bsSize="xsmall"
-                                            onClick={()=>{this.showTry(false)}}>
+                                            onClick={() => { this.showTry(false); }}
+                                        >
                                             Hide
                                         </Button>
                                     )}

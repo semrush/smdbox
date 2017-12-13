@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Table } from 'react-bootstrap';
 
-class ParamsTable extends React.PureComponent{
+class ParamsTable extends React.PureComponent {
     static propTypes = {
         schema: PropTypes.object
     }
@@ -14,12 +14,12 @@ class ParamsTable extends React.PureComponent{
         }
     }
     resolveType(type, parent) {
-        if (type === 'array'){
+        if (type === 'array') {
             return `[ ]${parent.items.type || ''}`;
         }
         
         if (type === 'object' && parent.$ref) {
-            return parent.$ref.split('/').pop()
+            return parent.$ref.split('/').pop();
         }
         
         return type;
@@ -48,16 +48,16 @@ class ParamsTable extends React.PureComponent{
         
         if (parent[param].properties) {
             Object.keys(parent[param].properties).forEach(
-                nestedParam => {
+                (nestedParam) => {
                     rows.push(
                         this.renderParam(
                             nestedParam,
                             parent[param].properties,
                             namespace ? `${namespace}.${param}` : param
                         )
-                    )
+                    );
                 }
-            )
+            );
         }
         
         return rows;
@@ -67,15 +67,15 @@ class ParamsTable extends React.PureComponent{
         return (
             <Table striped bordered condensed hover>
                 <thead>
-                <tr>
-                    <th>Parameter</th>
-                    <th>Description</th>
-                    <th>Type</th>
-                    <th>Required</th>
-                </tr>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {
+                    {
                     this.props.schema && this.props.schema.properties && Object.keys(this.props.schema.properties).map(
                         param => this.renderParam(param, this.props.schema.properties)
                     )

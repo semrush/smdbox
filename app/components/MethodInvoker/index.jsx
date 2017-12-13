@@ -23,6 +23,7 @@ class MethodInvoker extends React.PureComponent {
         loading: PropTypes.bool,
         error: PropTypes.object,
         response: PropTypes.object,
+        method: PropTypes.string.isRequired
     };
     
     static defaultProps = {
@@ -44,7 +45,7 @@ class MethodInvoker extends React.PureComponent {
         if (this.props.loading) {
             return (
                 <div className={b('loading')}>
-                    <i className="glyphicon glyphicon-refresh"></i>
+                    <i className="glyphicon glyphicon-refresh" />
                 </div>
             );
         }
@@ -80,8 +81,8 @@ class MethodInvoker extends React.PureComponent {
                     <Tabs
                         defaultActiveKey={1}
                         id="method-invoker-tabs"
-                        mountOnEnter={true}
-                        unmountOnExit={true}
+                        mountOnEnter
+                        unmountOnExit
                     >
                         <Tab eventKey={1} title="Form">
                             <FormFromSchema

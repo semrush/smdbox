@@ -30,6 +30,8 @@
     "class-methods-use-this": 0,
     "no-mixed-operators": 0,
     "no-unused-expressions": 0,
+    "func-names": 0,
+    "no-console": 0,
     "react/sort-comp": 0,
     "jsx-a11y": 0,
     "jsx-a11y/no-static-element-interactions": 0,

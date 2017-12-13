@@ -23,11 +23,11 @@ class RawJsonEditor extends React.PureComponent {
         formData: {}
     };
     
-    state = { value: '', valid: true};
+    state = { value: '', valid: true };
     
     /* REACT LIFECYCLE */
     componentWillMount() {
-        this.setState({value: this.getTextValue()})
+        this.setState({ value: this.getTextValue() });
     }
     
     componentWillUnmount() {
@@ -38,7 +38,7 @@ class RawJsonEditor extends React.PureComponent {
     /* HANDLERS */
     
     handleInputChange = (event) => {
-        this.setState({value: event.target.value} , () => {
+        this.setState({ value: event.target.value }, () => {
             this.validate();
         });
     };
@@ -48,7 +48,7 @@ class RawJsonEditor extends React.PureComponent {
         this.saveValueSafe();
     
         const jsonFull = this.validate(true);
-        if (jsonFull){
+        if (jsonFull) {
             this.props.onSubmit(jsonFull);
         }
     }
@@ -56,19 +56,19 @@ class RawJsonEditor extends React.PureComponent {
     validate = (getFullJson = false) => {
         try {
             const jsonObject = JSON.parse(this.state.value);
-            this.setState({valid: true});
+            this.setState({ valid: true });
             if (getFullJson) return jsonObject;
             
             return jsonObject.params || {};
         } catch (err) {
-            this.setState({valid: false});
+            this.setState({ valid: false });
             return false;
         }
     };
     
-    saveValueSafe(){
+    saveValueSafe() {
         const finalString = this.validate();
-        if (finalString){
+        if (finalString) {
             this.props.onChange(finalString);
         }
     }
