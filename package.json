@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./app --ext .js --ext .jsx",
+    "lintfix": "eslint ./app --ext .js --ext .jsx --fix",
     "dev": "NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.prod.js --progress -p",
     "dist": "NODE_ENV=production IS_DIST=true webpack --config webpack/webpack.prod.js --progress -p",
@@ -14,8 +15,8 @@
     "csscomb": "csscomb ./app/components"
   },
   "engines": {
-    "node": ">=0.10.0",
-    "yarn": "0.13.0"
+    "node": ">=5.10",
+    "yarn": "1.0.1"
   },
   "dependencies": {
     "axios": "0.16.2",

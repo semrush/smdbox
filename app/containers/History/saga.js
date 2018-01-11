@@ -1,7 +1,7 @@
 import { put, select, takeEvery } from 'redux-saga/effects';
 import uuid from 'uuid';
-import * as METHOD_ACTION_TYPES from 'containers/SelectedMethod/actionTypes';
-import { getSelectedMethodFullState } from 'containers/SelectedMethod/selectors';
+import * as METHOD_ACTION_TYPES from 'containers/MethodViewer/actionTypes';
+import { getSelectedMethodFullState } from 'containers/MethodViewer/selectors';
 import { getSelectedMethod } from 'containers/Sidebar/selectors';
 
 import { save } from './actions';

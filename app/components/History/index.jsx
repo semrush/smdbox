@@ -9,7 +9,7 @@ import './History.scss';
 
 const b = bemCl('sb-history');
 
-class History extends React.PureComponent {
+class History extends React.Component {
     static propTypes = {
         selectedItem: PropTypes.object,
         selectItem: PropTypes.func.isRequired,

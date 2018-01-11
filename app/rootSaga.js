@@ -1,11 +1,11 @@
-import SelectedMethod from 'containers/SelectedMethod/saga';
+import MethodViewer from 'containers/MethodViewer/saga';
 import Project from 'containers/Project/saga';
 import History from 'containers/History/saga';
 
 function* rootSaga() {
     yield [
         Project(),
-        SelectedMethod(),
+        MethodViewer(),
         History()
     ];
 }

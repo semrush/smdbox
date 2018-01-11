@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import bemCl from 'bem-cl';
 
 import Project from 'containers/Project';
-import SelectedMethod from 'containers/SelectedMethod';
+import MethodViewer from 'containers/MethodViewer';
 import History from 'containers/History';
 import Sidebar from 'containers/Sidebar';
 import { Grid, Col, Row, Modal } from 'react-bootstrap';
@@ -12,7 +12,7 @@ import './Application.scss';
 
 const b = bemCl('sb-application');
 
-class Application extends React.PureComponent {
+class Application extends React.Component {
     static propTypes = {
         isProjectCreated: PropTypes.bool.isRequired,
         settingsOpen: PropTypes.bool.isRequired,
@@ -68,7 +68,7 @@ class Application extends React.PureComponent {
                             <Sidebar />
                         </Col>
                         <Col md={9} className={b('content-column').toString()}>
-                            <SelectedMethod />
+                            <MethodViewer />
                         </Col>
                     </Row>
                     <Modal show={this.props.settingsOpen} onHide={this.hideSettings}>

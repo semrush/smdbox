@@ -1,12 +1,12 @@
-@import "app/styles/variables";
+@import 'app/styles/variables';
 
-.sb-method-description{
-    .tab-content{
-        padding-top: 10px;
-    }
-    .required-icon{
-        color: $successColor;
-        display: block;
-        text-align: center;
-    }
+.sb-method-description {
+	.tab-content {
+		padding-top: 10px;
+	}
+	.required-icon {
+		color: $successColor;
+		display: block;
+		text-align: center;
+	}
 }

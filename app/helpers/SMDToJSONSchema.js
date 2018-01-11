@@ -57,7 +57,7 @@ const smdToSchema = (smd) => {
         P.properties[param.name].title = param.name;
         P.definitions = { ...P.definitions, ...param.definitions };
         
-        // TODO remove manual cutting of wrong definitions
+        // manual cutting of wrong definitions. may be it should be removed but for now it helps
         Object.keys(P.definitions).forEach((key, i) => {
             const def = P.definitions[i];
 

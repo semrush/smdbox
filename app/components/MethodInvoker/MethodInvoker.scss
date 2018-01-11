@@ -1,34 +1,34 @@
-@import "app/styles/variables";
+@import 'app/styles/variables';
 
-.sb-method-invoker{
-    &__result{
-        padding: 10px;
-        border: 1px solid $borderColor;
-    }
-    &__loading{
-        i{
-            animation: rotate 1s linear infinite;
-            font-size: 30px;
-        }
-        margin: 0 auto;
-        text-align: center;
-    }
+.sb-method-invoker {
+	&__result {
+		padding: 10px;
+		border: 1px solid $borderColor;
+	}
+	&__loading {
+		i {
+			animation: rotate 1s linear infinite;
+			font-size: 30px;
+		}
+		margin: 0 auto;
+		text-align: center;
+	}
 
-    &__content{
-        margin-bottom: 20px;
-    }
-    .tab-content{
-        padding-top: 10px;
-    }
+	&__content {
+		margin-bottom: 20px;
+	}
+	.tab-content {
+		padding-top: 10px;
+	}
 }
 
 
 
-@keyframes rotate{
-    from{
-        transform: rotate(0deg)
-    }
-    to{
-        transform: rotate(360deg)
-    }
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
