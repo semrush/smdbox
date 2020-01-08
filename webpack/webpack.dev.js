@@ -6,7 +6,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const pkg  = require(path.join(process.cwd(), 'package.json'));
 const AutoDllPlugin = require('autodll-webpack-plugin');
 const APP_PORT = 4500;
-const APP_FOLDER = 'app';
+const APP_FOLDER = 'src';
 const BUILD_FOLDER = 'build';
 
 const vendor = Object.keys(pkg.dependencies);
@@ -121,7 +121,14 @@ const webpackConfig = {
             version: false,
             timings: true
         },
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: {
+            '/driver/api/*': {
+                target: 'http://localhost:5001',
+                secure: false,
+                changeOrigin: true
+            },
+        }
     },
 };
 

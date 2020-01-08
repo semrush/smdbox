@@ -18,24 +18,24 @@ class Sidebar extends React.Component {
         selectService: PropTypes.func.isRequired,
         selectedService: PropTypes.string
     };
-    
+
     static defaultProps = {
         namespacedMethods: {},
         otherMethods: {},
         selectedService: null
     };
-    
+
     state = {
         search: '',
     };
-    
+
     filter(methods) {
         return reduce(methods, (res, value, key) => {
             if (key.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) { res[key] = value; }
             return res;
         }, {});
     }
-    
+
     render() {
         return (
             <div className="sb-sidebar">
@@ -67,7 +67,7 @@ class Sidebar extends React.Component {
                         )) }
                     </Namespace>
                 )) }
-                
+
                 { !isEmpty(this.props.otherMethods) &&
                 <Namespace>
                     { map(this.filter(this.props.otherMethods), (method, methodKey) => (

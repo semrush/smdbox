@@ -15,14 +15,18 @@ const initialState = {
 
 function createProjectReducer(state = initialState, action) {
     switch (action.type) {
-    case ACTION_TYPES.FETCH:
+    case ACTION_TYPES.FETCH_REQUEST:
         return { ...state, fetchingSchema: true };
     case ACTION_TYPES.FETCH_SUCCESS: {
-        const url = new URL(action.smdUrl);
+        let url = action.smdUrl.replace(/\?smd/, '')
+        if (url === action.smdUrl) {
+            const parsedUrl = new URL(action.smdUrl);
+            url = `${parsedUrl.origin}${action.smdScheme.target || ''}`
+        }
         return { ...state,
             smdScheme: action.smdScheme,
             smdUrl: action.smdUrl,
-            endpoint: action.isRefresh ? state.endpoint : `${url.origin}${action.smdScheme.target}`,
+            endpoint: action.isRefresh ? state.endpoint : url,
             fetchingSchema: false,
             fetchingSmdError: false
         };
@@ -47,7 +51,7 @@ function createProjectReducer(state = initialState, action) {
         };
     case ACTION_TYPES.CLEAR:
         return { ...initialState };
-        
+
     default:
         return state;
     }

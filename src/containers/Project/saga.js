@@ -5,6 +5,7 @@ import * as ProjectActions from './actions';
 
 function* onFetch({ url, isRefresh }) {
     try {
+        yield put({ type: ACTION_TYPES.FETCH_REQUEST})
         const smdScheme = yield call(() => {
             return axios.get(url);
         });

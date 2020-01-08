@@ -20,23 +20,23 @@ class Application extends React.Component {
         openSettings: PropTypes.func.isRequired,
         clearProject: PropTypes.func.isRequired,
     };
-    
-    
+
+
     state = {
         showHistory: false,
     };
-    
+
     hideSettings = () => {
         this.props.closeSettings();
     };
-    
+
     hideHistory = () => {
         this.setState({ showHistory: false });
     };
     showHistory = () => {
         this.setState({ showHistory: true });
     };
-    
+
     render() {
         return (
             <div className={b()}>
@@ -55,41 +55,38 @@ class Application extends React.Component {
                     </div>
                 </nav>
                 {
-                !this.props.isProjectCreated &&
-                <Grid style={{ paddingTop: '15px' }}>
-                    <Project />
-                </Grid>
-            }
-                {
-                this.props.isProjectCreated &&
-                <Grid fluid>
-                    <Row>
-                        <Col md={3} className={b('content-column').toString()}>
-                            <Sidebar />
-                        </Col>
-                        <Col md={9} className={b('content-column').toString()}>
-                            <MethodViewer />
-                        </Col>
-                    </Row>
-                    <Modal show={this.props.settingsOpen} onHide={this.hideSettings}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Project settings</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Project mode="settings" onSubmit={this.hideSettings} />
-                        </Modal.Body>
-                    </Modal>
-    
-                    <Modal show={this.state.showHistory} onHide={this.hideHistory} bsSize="large">
-                        <Modal.Header closeButton>
-                            <Modal.Title>Request history</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <History />
-                        </Modal.Body>
-                    </Modal>
-                </Grid>
-            }
+                !this.props.isProjectCreated ?
+                    <Grid style={{ paddingTop: '15px' }}>
+                        <Project />
+                    </Grid> :
+                    <Grid fluid>
+                        <Row>
+                            <Col md={3} className={b('content-column').toString()}>
+                                <Sidebar />
+                            </Col>
+                            <Col md={9} className={b('content-column').toString()}>
+                                <MethodViewer />
+                            </Col>
+                        </Row>
+                        <Modal show={this.props.settingsOpen} onHide={this.hideSettings}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Project settings</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Project mode="settings" onSubmit={this.hideSettings} />
+                            </Modal.Body>
+                        </Modal>
+
+                        <Modal show={this.state.showHistory} onHide={this.hideHistory} bsSize="large">
+                            <Modal.Header closeButton>
+                                <Modal.Title>Request history</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <History />
+                            </Modal.Body>
+                        </Modal>
+                    </Grid>
+                }
             </div>
         );
     }

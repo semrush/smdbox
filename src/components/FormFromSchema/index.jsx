@@ -10,29 +10,29 @@ import './FormFromSchema.scss';
 const b = bemCl('sb-form-from-schema');
 
 class FormFromSchema extends React.PureComponent {
-   
+
     static propTypes = {
         schema: PropTypes.object,
         formData: PropTypes.object,
         onSubmit: PropTypes.func,
         onChange: PropTypes.func,
     };
-    
+
     static defaultProps = {
         schema: null,
         formData: {},
         onSubmit: () => {},
         onChange: () => {},
     };
-    
+
     handleFormChange = (data) => {
         this.props.onChange(data.formData);
     };
-    
+
     handleError = (error) => {
         console.log(error);
     };
-    
+
     render() {
         if (!this.props.schema) return null;
         return (

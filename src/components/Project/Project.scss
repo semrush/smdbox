@@ -11,4 +11,11 @@
 	.btn + .btn {
 		margin-left: 10px;
 	}
+    &__loading {
+        margin-left: 10px;
+        i {
+            animation: rotate 1s linear infinite;
+            font-size: 20px;
+        }
+    }
 }

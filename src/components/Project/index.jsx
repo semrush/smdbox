@@ -17,7 +17,7 @@ const modes = {
 };
 
 class Project extends React.Component {
-    
+
     static propTypes = {
         endpoint: PropTypes.string,
         fetchSmd: PropTypes.func.isRequired,
@@ -30,7 +30,7 @@ class Project extends React.Component {
         smdUrl: PropTypes.string,
         mode: PropTypes.oneOf([modes.INIT, modes.SETTINGS])
     };
-    
+
     static defaultProps = {
         onSubmit: () => {},
         fetchingSmdError: false,
@@ -39,29 +39,29 @@ class Project extends React.Component {
         smdUrl: '',
         mode: modes.INIT
     };
-    
+
     constructor(props) {
         super(props);
-    
+
         this.state = {
             endpoint: this.props.endpoint || '',
             headers: map(this.props.headers, (value = '', key = '') => ({ key, value }))
         };
-    
+
         this.fetchSmd = debounce(this.fetchSmd.bind(this), 800);
     }
-    
-    
+
+
     componentWillReceiveProps({ endpoint }) {
         if (endpoint !== this.props.endpoint) {
             this.setState({ endpoint });
         }
     }
-    
+
     fetchSmd(url, isRefresh = false) {
         this.props.fetchSmd(url, isRefresh);
     }
-    
+
     onSubmit = (e) => {
         e.preventDefault();
         this.props.create({
@@ -73,35 +73,34 @@ class Project extends React.Component {
         });
         this.props.onSubmit();
     };
-    
+
     onRefresh = () => {
         this.fetchSmd(this.props.smdUrl, true);
     };
-    
+
     addHeader() {
         this.setState({ headers: [...this.state.headers, { key: '', value: '' }] });
     }
-    
+
     removeHeader(index) {
         this.setState({ headers: [
             ...this.state.headers.slice(0, index),
             ...this.state.headers.slice(index + 1)
         ] });
     }
-    
+
     getFormValidationState = () => {
         if (this.props.fetchingSmdError) return 'error';
-    
+
         if (this.props.smdScheme !== null) return 'success';
-        
+
         return null;
     }
-    
+
     handleChangeUrl = (e) => {
-        e.persist();
         this.fetchSmd(e.nativeEvent.target.value);
     }
-    
+
     handleChangeHeaderName = (index, value) => {
         this.setState({
             headers: map(this.state.headers, (header, headerIndex) => {
@@ -114,7 +113,7 @@ class Project extends React.Component {
             })
         });
     };
-    
+
     handleChangeHeaderValue = (index, value) => {
         this.setState({
             headers: map(this.state.headers, (header, headerIndex) => {
@@ -127,18 +126,21 @@ class Project extends React.Component {
             })
         });
     };
-    
+
     render() {
         const { mode } = this.props;
         return (
             <div className={b.createProject()}>
                 { mode !== modes.SETTINGS &&
                     <div>
-                        <h4>SMD scheme *</h4>
+                        <h4>SMD scheme *
+                            {
+                                this.props.fetchingSchema && <span className={b.createProject('loading')}> <i className="glyphicon glyphicon-refresh" /></span>
+                            }
+                        </h4>
                         <FormGroup validationState={this.getFormValidationState()}>
                             <FormControl
                                 placeholder="Enter SMD scheme url"
-                                disabled={this.props.fetchingSchema}
                                 onChange={this.handleChangeUrl}
                             />
                         </FormGroup>
@@ -150,7 +152,9 @@ class Project extends React.Component {
                         <Form inline>
                             <FormGroup>
                                 <FormControl
-                                    placeholder="Key" value={header.key} onChange={(e) => {
+                                    placeholder="Key"
+                                    value={header.key}
+                                    onChange={(e) => {
                                         this.handleChangeHeaderName(index, e.nativeEvent.target.value);
                                     }}
                                 />
@@ -202,7 +206,7 @@ class Project extends React.Component {
                             </Button>
                         )
                     }
-                    
+
                 </FormGroup>
             </div>
         );

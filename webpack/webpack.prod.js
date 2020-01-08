@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 const PUBLIC_PATH = '/';
-const APP_FOLDER = 'app';
+const APP_FOLDER = 'src';
 
 const isDist = process.env.IS_DIST === 'true';
 
@@ -94,7 +94,7 @@ const webpackConfigWidget = {
             __PROD__: JSON.stringify(true),
         }),
         new webpack.NamedModulesPlugin(),
-        
+
     ],
     resolve: {
         modules: [APP_FOLDER, 'node_modules'],

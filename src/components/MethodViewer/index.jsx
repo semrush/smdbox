@@ -22,7 +22,7 @@ class MethodViewer extends React.PureComponent {
         state: PropTypes.object,
         selectedMethod: PropTypes.string.isRequired
     };
-    
+
     static defaultProps = {
         error: null,
         loading: false,
@@ -30,17 +30,17 @@ class MethodViewer extends React.PureComponent {
         formData: {},
         state: {}
     };
-    
+
     state = { showInfo: true, showTry: true };
-    
+
     showInfo = (show = true) => {
         this.setState({ showInfo: show });
     };
-    
+
     showTry = (show = true) => {
         this.setState({ showTry: show });
     };
-    
+
     renderContent() {
         if (!this.props.methodSchema) {
             return (
@@ -49,7 +49,7 @@ class MethodViewer extends React.PureComponent {
                 </Alert>
             );
         }
-        
+
         return (
             <Grid fluid>
                 <Row>
@@ -83,7 +83,7 @@ class MethodViewer extends React.PureComponent {
                             </Col>
                         )
                     }
-                    
+
                     {
                         this.state.showTry && (
                             <Col md={this.state.showInfo ? 5 : 12}>
@@ -121,7 +121,7 @@ class MethodViewer extends React.PureComponent {
                             </Col>
                         )
                     }
-                    
+
                 </Row>
             </Grid>
         );
