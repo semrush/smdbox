@@ -122,13 +122,6 @@ const webpackConfig = {
             timings: true
         },
         historyApiFallback: true,
-        proxy: {
-            '/driver/api/*': {
-                target: 'http://localhost:5001',
-                secure: false,
-                changeOrigin: true
-            },
-        }
     },
 };
 
