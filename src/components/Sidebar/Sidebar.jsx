@@ -29,9 +29,14 @@ class Sidebar extends React.Component {
         search: '',
     };
 
-    filter(methods) {
+    filter(methods, namespace) {
+        const searchString = this.state.search.toLowerCase();
+        if (namespace && namespace.toLowerCase().indexOf(searchString) !== -1) {
+            return methods;
+        }
         return reduce(methods, (res, value, key) => {
-            if (key.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) { res[key] = value; }
+            const combinedKey = [namespace, key].filter(Boolean).join('.').toLowerCase();
+            if (combinedKey.indexOf(searchString) !== -1) { res[key] = value; }
             return res;
         }, {});
     }
@@ -57,7 +62,7 @@ class Sidebar extends React.Component {
                 </div>
                 { map(this.props.namespacedMethods, (namespace, namespaceKey) => (
                     <Namespace namespaceName={namespaceKey} key={namespaceKey}>
-                        { map(this.filter(namespace), (method, methodKey) => (
+                        { map(this.filter(namespace, namespaceKey), (method, methodKey) => (
                             <Method
                                 methodName={methodKey}
                                 key={methodKey}
