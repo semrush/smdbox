@@ -19,7 +19,7 @@
     "yarn": ">=1.0.1"
   },
   "dependencies": {
-    "axios": "0.18.1",
+    "axios": "0.19.2",
     "bem-cl": "1.0.2",
     "copy-to-clipboard": "3.0.6",
     "lodash": "4.17.19",
