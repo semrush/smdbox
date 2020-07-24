@@ -74,7 +74,7 @@ const webpackConfig = {
             filename: 'index.html',
             template: `${APP_FOLDER}/assets/html/index.dev.html`,
             minify: false,
-            inject: 'body',
+            inject: 'head',
         }),
         new AutoDllPlugin({
             inject: true,

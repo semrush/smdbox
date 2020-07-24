@@ -8,5 +8,17 @@
 </head>
 <body>
 <div id="json-rpc-root"></div>
+<script>
+    if (window.smdbox) {
+        window.smdbox({
+            selector: '#json-rpc-root',
+            "smdUrl": "http://localhost:5001/jet/api/rpc?smd",
+            "endpoint": "http://localhost:5001/jet/api/rpc",
+            headers: {
+                "Auth-Key": "14d5eea49fa0a0903f4d9c792a699c2c"
+            }
+        })
+    }
+</script>
 </body>
 </html>

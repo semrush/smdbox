@@ -83,7 +83,7 @@ const webpackConfigWidget = {
             filename: 'index.html',
             template: `${APP_FOLDER}/assets/html/index.html`,
             minify: false,
-            inject: 'body',
+            inject: 'head',
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale/, /en|ru/), // eslint-disable-line no-useless-escape, max-len
         new webpack.DefinePlugin({

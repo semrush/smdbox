@@ -21,6 +21,11 @@ export function clearProject() {
     };
 }
 
+export function clearProjectWithDbReset() {
+    return {
+        type: ACTION_TYPES.CLEAR_WITH_DB
+    };
+}
 
 export function openSettings() {
     return {
