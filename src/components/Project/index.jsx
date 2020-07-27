@@ -45,16 +45,25 @@ class Project extends React.Component {
 
         this.state = {
             endpoint: this.props.endpoint || '',
+            smdUrl: this.props.smdUrl || '',
             headers: map(this.props.headers, (value = '', key = '') => ({ key, value }))
         };
 
         this.fetchSmd = debounce(this.fetchSmd.bind(this), 800);
+
+        // if endpoint is set initially - preload scheme
+        if (this.state.endpoint !== '' && !props.created) {
+            this.fetchSmd(this.state.smdUrl);
+        }
     }
 
 
-    componentWillReceiveProps({ endpoint }) {
+    componentWillReceiveProps({ endpoint, smdUrl }) {
         if (endpoint !== this.props.endpoint) {
             this.setState({ endpoint });
+        }
+        if (smdUrl !== this.props.smdUrl) {
+            this.setState({ smdUrl });
         }
     }
 
@@ -66,6 +75,7 @@ class Project extends React.Component {
         e.preventDefault();
         this.props.create({
             endpoint: this.state.endpoint,
+            smdUrl: this.state.smdUrl,
             headers: reduce(this.state.headers, (res, header) => {
                 if (header.key && header.value) { res[header.key] = header.value; }
                 return res;
@@ -98,7 +108,9 @@ class Project extends React.Component {
     }
 
     handleChangeUrl = (e) => {
-        this.fetchSmd(e.nativeEvent.target.value);
+        this.setState({ smdUrl: e.nativeEvent.target.value }, () => {
+            this.fetchSmd(this.state.smdUrl);
+        });
     }
 
     handleChangeHeaderName = (index, value) => {
@@ -134,13 +146,14 @@ class Project extends React.Component {
                 { mode !== modes.SETTINGS &&
                     <div>
                         <h4>SMD scheme *
-                            {
-                                this.props.fetchingSchema && <span className={b.createProject('loading')}> <i className="glyphicon glyphicon-refresh" /></span>
-                            }
+                        {
+                            this.props.fetchingSchema && <span className={b.createProject('loading')}> <i className="glyphicon glyphicon-refresh" /></span>
+                        }
                         </h4>
                         <FormGroup validationState={this.getFormValidationState()}>
                             <FormControl
                                 placeholder="Enter SMD scheme url"
+                                value={this.state.smdUrl}
                                 onChange={this.handleChangeUrl}
                             />
                         </FormGroup>

@@ -31,7 +31,7 @@ export const get = (f) => {
             if (typeof (request.result) === 'object') {
                 f(request.result);
             } else {
-                f(false);
+                f({});
             }
         };
     });
@@ -54,7 +54,7 @@ export const syncStore = (store) => {
         requestAnimationFrame(() => {
             // remove formData from store
             const stateData = cloneDeep(store.getState());
-    
+
             // hotfix - react-json-schema cannot restore object values. Do not save formData
             if (stateData.selectedMethod &&
                 stateData.selectedMethod.formData &&
@@ -63,5 +63,14 @@ export const syncStore = (store) => {
             }
             write(stateData);
         });
+    });
+};
+
+export const clearStorage = () => {
+    connectDB((db) => {
+        const request = db.transaction([storeName], 'readwrite').objectStore(storeName).delete(storageKey);
+        request.onsuccess = function () {
+            window.location.reload();
+        };
     });
 };
