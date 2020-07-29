@@ -13,8 +13,8 @@ import './styles/main.scss';
 const autoInitSelector = '#json-rpc-root';
 
 const defaultOptions = {
-    endpoint: null,
-    smdUrl: null,
+    endpoint: undefined,
+    smdUrl: undefined,
     headers: {},
     selector: '#smdbox-root',
 };

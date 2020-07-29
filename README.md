@@ -6,8 +6,8 @@ SMD Box is UI for human-readable displaying of JSON-RPC SMD schemas from remote 
 Smdbox script exposes it's initialization to window.smdbox variable. Call window.smdbox() to initialize smdbox with default options, which are:
 ```javascript
 const defaultOptions = {
-    endpoint: null,             // api endpoint url
-    smdUrl: null,               // smd scheme url
+    endpoint: undefined,             // api endpoint url
+    smdUrl: undefined,               // smd scheme url
     headers: {},                // headers added to each request smdbox makes
     selector: '#smdbox-root', // element to which smdbox is inserted
 };
