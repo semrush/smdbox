@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import pickBy from 'lodash/pickBy';
+import identity from 'lodash/identity';
 import merge from 'lodash/merge';
 import Application from 'containers/Application';
 import { get as getStore } from 'helpers/session';
@@ -48,7 +50,9 @@ const init = (opts = {}) => {
 
     getStore((storeData = {}) => {
         // set preconfigured smdUrl, endpoint and headers from config
-        merge(storeData, { project: { smdUrl, endpoint, headers } });
+        // filter null values if some of settings are not defined, to avoid current values reset
+        const project = pickBy({ smdUrl, endpoint, headers }, identity);
+        merge(storeData, { project });
         const store = configureStore(storeData);
         renderApp(Application, store);
     });

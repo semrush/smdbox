@@ -9,7 +9,7 @@ const defaultOptions = {
     endpoint: null,             // api endpoint url
     smdUrl: null,               // smd scheme url
     headers: {},                // headers added to each request smdbox makes
-    selector: '#json-rpc-root', // element to which smdbox is inserted
+    selector: '#smdbox-root', // element to which smdbox is inserted
 };
 ```
 You can override any of this options to pre-fill project options.

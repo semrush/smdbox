@@ -1,8 +1,8 @@
 {
   "name": "smdbox",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "main": "src/index.jsx",
-  "repository": "https://gitlab.semrush.net/m.eremin/smdbox",
+  "repository": "https://github.com/semrush/smdbox",
   "author": "Semrush",
   "license": "MIT",
   "scripts": {
