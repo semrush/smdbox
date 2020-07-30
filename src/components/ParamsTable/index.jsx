@@ -7,27 +7,31 @@ class ParamsTable extends React.PureComponent {
     static propTypes = {
         schema: PropTypes.object
     }
-    
+
     static defaultProps = {
         schema: {
             properties: {}
         }
     }
+
+    resolveDefinitionName = (def) => {
+        return def.split('/').pop();
+    }
     resolveType(type, parent) {
         if (type === 'array') {
-            return `[ ]${parent.items.type || ''}`;
+            return `[ ]${parent.items.type || this.resolveDefinitionName(parent.items.$ref) || ''}`;
         }
-        
+
         if (type === 'object' && parent.$ref) {
             return parent.$ref.split('/').pop();
         }
-        
+
         return type;
     }
-    
+
     renderParam(param, parent, namespace = '') {
         const rows = [];
-        
+
         rows.push(
             <tr key={namespace ? `${namespace}.${param}` : param}>
                 <td>
@@ -44,8 +48,8 @@ class ParamsTable extends React.PureComponent {
                 </td>
             </tr>
         );
-        
-        
+
+
         if (parent[param].properties) {
             Object.keys(parent[param].properties).forEach(
                 (nestedParam) => {
@@ -59,10 +63,10 @@ class ParamsTable extends React.PureComponent {
                 }
             );
         }
-        
+
         return rows;
     }
-    
+
     render() {
         return (
             <Table striped bordered condensed hover>
@@ -76,10 +80,10 @@ class ParamsTable extends React.PureComponent {
                 </thead>
                 <tbody>
                     {
-                    this.props.schema && this.props.schema.properties && Object.keys(this.props.schema.properties).map(
-                        param => this.renderParam(param, this.props.schema.properties)
-                    )
-                }
+                        this.props.schema && this.props.schema.properties && Object.keys(this.props.schema.properties).map(
+                            param => this.renderParam(param, this.props.schema.properties)
+                        )
+                    }
                 </tbody>
             </Table>
         );

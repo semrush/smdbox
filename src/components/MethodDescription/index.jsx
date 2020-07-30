@@ -14,23 +14,14 @@ class MethodDescription extends React.PureComponent {
     static propTypes = {
         schema: PropTypes.object
     };
-    
+
     static defaultProps = {
         schema: {}
     };
-    
-    resolveType(type, parent) {
-        if (type === 'array') {
-            return `[ ]${parent.items.type || ''}`;
-        }
-        
-        return type;
-    }
-    
 
     renderParam(param, parent, namespace = '') {
         const rows = [];
-        
+
         rows.push(
             <tr key={namespace ? `${namespace}.${param}` : param}>
                 <td>
@@ -47,8 +38,8 @@ class MethodDescription extends React.PureComponent {
                 </td>
             </tr>
         );
-        
-        
+
+
         if (parent[param].properties) {
             Object.keys(parent[param].properties).forEach(
                 (nestedParam) => {
@@ -62,10 +53,10 @@ class MethodDescription extends React.PureComponent {
                 }
             );
         }
-        
+
         return rows;
     }
-    
+
     renderInputParamsTableIfNeeded() {
         if (!Object.keys(this.props.schema.properties).length) {
             return (
@@ -74,7 +65,7 @@ class MethodDescription extends React.PureComponent {
                 </Alert>
             );
         }
-        
+
         return (
             <div>
                 <h4>Input params</h4>
@@ -95,7 +86,28 @@ class MethodDescription extends React.PureComponent {
             </div>
         );
     }
-    
+    hasOutputProperties = () => {
+        return this.props.schema.returns && this.props.schema.returns.properties && Object.keys(this.props.schema.returns.properties).length;
+    }
+
+    resolveDefinitionName = (def) => {
+        return def.split('/').pop();
+    }
+
+    resolveType = (returns) => {
+        if (!returns) return '';
+
+        if (returns.type === 'array') {
+            return `[ ]${returns.items.type || this.resolveDefinitionName(returns.items.$ref) || ''}`;
+        }
+
+        if (returns.type === 'object' && returns.$ref) {
+            return this.resolveDefinitionName(returns.$ref);
+        }
+
+        return returns.type;
+    }
+
     renderOutputTable() {
         return (
             <div className={b('output-tables')}>
@@ -104,28 +116,35 @@ class MethodDescription extends React.PureComponent {
                         <tr>
                             <th>Type</th>
                             {
-                            this.props.schema.returns.description && (
-                                <th>Description</th>
-                            )
-                        }
+                                this.props.schema.returns.description && (
+                                    <th>Description</th>
+                                )
+                            }
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{this.props.schema.returns.type}</td>
+                            <td>{this.resolveType(this.props.schema.returns)}</td>
                             {
-                            this.props.schema.returns.description && (
-                                <td>{this.props.schema.returns.description}</td>
-                            )
-                        }
-            
+                                this.props.schema.returns.description && (
+                                    <td>{this.props.schema.returns.description}</td>
+                                )
+                            }
                         </tr>
                     </tbody>
                 </Table>
+                {
+                    this.hasOutputProperties()
+                        ? <div key="return-properties">
+                            <h5>Properties of return object</h5>
+                            <ParamsTable schema={this.props.schema.returns} />
+                        </div>
+                        : null
+                }
             </div>
         );
     }
-    
+
     renderErrorsTableIfNeeded() {
         return (
             <Table striped bordered condensed hover>
@@ -137,21 +156,21 @@ class MethodDescription extends React.PureComponent {
                 </thead>
                 <tbody>
                     {
-                    map(this.props.schema.errors, (errorDescription, errorCode) => {
-                        return (
-                            <tr key={errorCode}>
-                                <td>{errorCode}</td>
-                                <td>{errorDescription}</td>
-                            </tr>
-                        );
-                    })
-                }
-                
+                        map(this.props.schema.errors, (errorDescription, errorCode) => {
+                            return (
+                                <tr key={errorCode}>
+                                    <td>{errorCode}</td>
+                                    <td>{errorDescription}</td>
+                                </tr>
+                            );
+                        })
+                    }
+
                 </tbody>
             </Table>
         );
     }
-    
+
     renderOutputParamsIfNeeded() {
         if (!this.props.schema.returns || !this.props.schema.returns.type) {
             return (
@@ -164,7 +183,7 @@ class MethodDescription extends React.PureComponent {
             <div className={b('output')}>
                 <h4>Returns:</h4>
                 { this.renderOutputTable() }
-                
+
                 {
                     this.props.schema.returns.definitions &&
                     map(this.props.schema.returns.definitions, (definition, definitionKey) => {
@@ -179,14 +198,14 @@ class MethodDescription extends React.PureComponent {
             </div>
         );
     }
-    
+
     render() {
         if (!this.props.schema || !this.props.schema.properties) return null;
-        
+
         return (
             <div className={b()}>
                 <h5>{this.props.schema.description}</h5>
-    
+
                 <Tabs
                     defaultActiveKey={1}
                     id="method-viewer-tabs"
@@ -205,7 +224,7 @@ class MethodDescription extends React.PureComponent {
                         )
                     }
                 </Tabs>
-                
+
             </div>
         );
     }
