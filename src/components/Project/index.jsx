@@ -58,7 +58,7 @@ class Project extends React.Component {
     }
 
 
-    componentWillReceiveProps({ endpoint, smdUrl }) {
+    UNSAFE_componentWillReceiveProps({ endpoint, smdUrl }) { // eslint-disable-line
         if (endpoint !== this.props.endpoint) {
             this.setState({ endpoint });
         }
@@ -203,7 +203,7 @@ class Project extends React.Component {
                         bsStyle={mode === modes.SETTINGS ? 'primary' : 'success'}
                         type="submit"
                         onClick={this.onSubmit}
-                        disabled={this.props.smdScheme === null}
+                        disabled={this.props.smdScheme === null || this.props.fetchingSmdError}
                     >
                         { mode === modes.SETTINGS ? 'Update' : 'Create' }
                     </Button>

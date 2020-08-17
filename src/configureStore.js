@@ -30,7 +30,7 @@ export default function (initialData) {
             ...enhancers
         )
     );
-    
+
     syncStore(store);
 
     sagaMiddleware.run(rootSaga);

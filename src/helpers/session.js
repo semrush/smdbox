@@ -19,7 +19,7 @@ const connectDB = (f) => {
     };
     request.onupgradeneeded = function (e) {
         e.currentTarget.result.createObjectStore(storeName);
-        connectDB(f);
+        // connectDB(f); // no need to reconnect
     };
 };
 
